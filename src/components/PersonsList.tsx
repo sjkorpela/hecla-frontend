@@ -5,7 +5,7 @@ import {persons} from "@/services/persons";
 export default function PersonsList() {
 
     async function refreshList() {
-        await persons.getAllPersons();
+        console.log(await persons.getAllPersons());
     }
     return (
         <div>

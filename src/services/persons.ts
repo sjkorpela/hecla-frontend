@@ -1,16 +1,15 @@
 import {ENDPOINTS} from "@/lib";
 import keycloak from "@/lib/keycloak";
+import {Person} from "@/types/person";
 
 export class persons {
-    public static async getAllPersons() {
+    public static async getAllPersons(): Promise<Person> {
         await keycloak.updateToken(30);
         const response = await fetch(ENDPOINTS.PERSONS, {
             headers: {
                 Authorization: `Bearer ${keycloak.token}`,
             },
         });
-        const persons = await response.json();
-        console.log(persons);
-        return persons;
+        return await response.json();
     }
 }
