@@ -3,7 +3,7 @@ import keycloak from "@/lib/keycloak";
 import {Person} from "@/types/person";
 
 export class persons {
-    public static async getAllPersons(): Promise<Person> {
+    public static async getAllPersons(): Promise<Person[]> {
         await keycloak.updateToken(30);
         const response = await fetch(ENDPOINTS.PERSONS, {
             headers: {
