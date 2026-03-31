@@ -6,4 +6,18 @@ const keycloak = new Keycloak({
     clientId: "public",
 });
 
+let initPromise: Promise<boolean> | null = null;
+
+export function initKeycloak() {
+    if (!initPromise) {
+        initPromise = keycloak.init({ onLoad: "login-required" }).catch((e) => {
+            if (e?.message?.includes("only be initialized once")) {
+                return true;
+            }
+            throw e;
+        });
+    }
+    return initPromise;
+}
+
 export default keycloak;
