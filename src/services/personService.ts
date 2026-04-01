@@ -54,4 +54,14 @@ export class PersonService {
         })
         return null;
     }
+
+    public static getPersonsFirstAndLastName(person: Person): String | null {
+        if (person == null) {
+            return null;
+        }
+        let personName = PersonService.getPersonsNickname(person.firstNames) ?? person.firstNames[0].name ?? "N/A"
+        personName += " "
+        personName += PersonService.getPersonsCurrentLastName(person.lastNames) ?? person.lastNames[0].name ?? "N/A"
+        return personName;
+    }
 }
