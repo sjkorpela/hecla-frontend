@@ -40,7 +40,7 @@ export default function PersonInfo({ id }: Props) {
     const personName = PersonService.getPersonsFirstAndLastName(person)
 
     let allFirstNames = ""
-    for (let i = 0; i < person.firstNames.length; i++) {
+    for (let i = 0; i < person.firstNames?.length; i++) {
         if (i == person.firstNames.length - 1) {
             allFirstNames += person.firstNames[i].name
         } else {
@@ -49,7 +49,7 @@ export default function PersonInfo({ id }: Props) {
     }
 
     let allLastNames = ""
-    for (let i = 0; i < person.lastNames.length; i++) {
+    for (let i = 0; i < person.lastNames?.length; i++) {
         if (i == person.lastNames.length - 1) {
             allLastNames += person.lastNames[i].name
         } else {
@@ -71,7 +71,7 @@ export default function PersonInfo({ id }: Props) {
         <div>
             <h1>{personName?.toUpperCase() ?? "N/A"}</h1>
             <br />
-            <h2>Perustiedot</h2>
+            <h2>PERUSTIEDOT</h2>
             <ul>
                 <li>Etunimet: {allFirstNames}</li>
                 <li>Sukunimet: {allLastNames}</li>
@@ -80,10 +80,10 @@ export default function PersonInfo({ id }: Props) {
                 <li>Kuollut: {deathInfo}</li>
             </ul>
             <br />
-            <h2>Lisätiedot</h2>
+            <h2>LISÄTIEDOT</h2>
             <ul>
                 {
-                    person.additionalInfos.map((ai, key) => {
+                    person.additionalInfos?.map((ai, key) => {
                         return (
                             <div key={key}>
                                 <AdditionalInfoItem info={ai} />
@@ -101,8 +101,10 @@ export default function PersonInfo({ id }: Props) {
             </ul>
             <br />
             <h2>LISÄVAIHTOEHDOT</h2>
-            <p>tba</p>
-            <br />
+            <ul>
+                <li><Link href={`/persons/${id}/put`}><u>Muokkaa sukulaista</u></Link></li>
+                <li><Link href={`/persons/${id}/delete`}><u>Poista sukulainen</u></Link></li>
+            </ul>
         </div>
     )
 }

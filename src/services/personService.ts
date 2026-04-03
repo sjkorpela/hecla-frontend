@@ -47,37 +47,44 @@ export class PersonService {
         return await response.json();
     }
 
+    public static async putPerson(id: number, person: PostPerson): Promise<number> {
+        if (keycloak.isTokenExpired()) {
+            await keycloak.login();
+        }
+        const response = await fetch(`${ENDPOINTS.PERSONS}/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(person),
+            headers: {
+                Authorization: `Bearer ${keycloak.token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        return response.status;
+    }
+
     public static getPersonsNickname(firstNames: FirstName[]): string | null {
         if (firstNames == null) {
             return null;
         }
-        firstNames.forEach(fn => {
-            if (fn.nickname) {
-                return fn.name;
-            }
-        })
-        return null;
+        const temp = firstNames.filter(fn => fn.nickname);
+        return temp.length > 0 ? temp[0].name : null;
     }
 
     public static getPersonsCurrentLastName(lastNames: LastName[]): string | null {
         if (lastNames == null) {
             return null;
         }
-        lastNames.forEach(ln => {
-            if (ln.current) {
-                return ln.name;
-            }
-        })
-        return null;
+        const temp = lastNames.filter(ln => ln.current);
+        return temp.length > 0 ? temp[0].name : null;
     }
 
     public static getPersonsFirstAndLastName(person: Person | null): string | null {
         if (person == null) {
             return null;
         }
-        let personName = PersonService.getPersonsNickname(person.firstNames) ?? person.firstNames[0]?.name ?? "N/A"
+        let personName = PersonService.getPersonsNickname(person.firstNames) ?? "N/A"
         personName += " "
-        personName += PersonService.getPersonsCurrentLastName(person.lastNames) ?? person.lastNames[0]?.name ?? "N/A"
+        personName += PersonService.getPersonsCurrentLastName(person.lastNames) ?? "N/A"
         return personName;
     }
 }

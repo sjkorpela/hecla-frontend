@@ -2,32 +2,60 @@
 
 import {useEffect, useState} from "react";
 import FormNamePool from "@/components/formNamePool";
-import FormAdditionalInfoPool from '../../../components/formAdditionalInfoPool';
 import {AdditionalInfo} from "@/types/additionalInfo";
 import {Person} from "@/types/person";
 import {PersonService} from "@/services/personService";
 import {PostPerson} from "@/types/postPerson";
 import {FirstName} from "@/types/firstName";
 import {LastName} from "@/types/lastName";
+import FormAdditionalInfoPool from "@/components/formAdditionalInfoPool";
 
-export default function PostForm() {
+interface Props {
+    id: number
+}
 
-    const [firstNames, setFirstnames] = useState<string[]>([""])
-    const [lastNames, setLastNames] = useState<string[]>([""])
-    const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([
-        {
-            key: "",
-            value: ""
-        }
-    ])
+export default function PutForm({ id }: Props) {
 
+    const [person, setPerson] = useState<Person | null>(null);
+    const [fatherId, setFatherId] = useState<number | null>(null);
+    const [motherId, setMotherId] = useState<number | null>(null);
     const [personList, setPersonList] = useState<Person[] | null>(null);
 
+    const [firstNames, setFirstnames] = useState<string[]>([])
+    const [lastNames, setLastNames] = useState<string[]>([])
+    const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([])
+
     useEffect(() => {
-        if (personList == null) {
-            PersonService.getAllPersons().then(setPersonList);
-        }
-    }, [personList]);
+        (async () => {
+            console.log("ID", id)
+            if (id == null) {
+                return;
+            }
+            const p: Person = await PersonService.getPersonById(id);
+            const pl: Person[] = await PersonService.getAllPersons();
+
+            console.log(p)
+
+            setPerson(p);
+            setFatherId(p.fatherId);
+            setMotherId(p.motherId);
+            setPersonList(pl);
+
+            const fn: FirstName[] = p.firstNames ?? [];
+            const ln: LastName[] = p.lastNames ?? [];
+            const ai: AdditionalInfo[] = p.additionalInfos ?? [];
+            setFirstnames(fn.map(fn => {return fn.name}));
+            setLastNames(ln.map(ln => {return ln.name}));
+            setAdditionalInfos(ai);
+        })();
+
+    }, [id]);
+
+    if (id == null || person == null) {
+        return (
+            <p>Loading...</p>
+        )
+    }
 
     async function formSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -76,11 +104,11 @@ export default function PostForm() {
         }
 
         // console.log("POST", person)
-        const result = await PersonService.postPerson(person);
+        const result = await PersonService.putPerson(id, person);
         // console.log("RESPONSE", result)
 
-        if (result.id != null) {
-            alert("Sukulainen tallennettu tietokantaan tunnuksella: " + result.id);
+        if (result == 200) {
+            alert("Muokkaus onnistui");
         } else {
             alert("Jokin meni vikaan?")
         }
@@ -122,12 +150,17 @@ export default function PostForm() {
             <br/>
 
             <label>Isä</label><br/>
-            <select name={"fatherId"}>
+            <select name={"fatherId"} defaultValue={fatherId ?? "null"}>
                 <option value={"null"}>Valitse</option>
                 {
                     personList?.map((person, key) => {
+                        if (person.id == id) {
+                            return null;
+                        }
                         return (
-                            <option value={person.id} key={key}>{person.id} {PersonService.getPersonsFirstAndLastName(person)}</option>
+                            <option value={person.id} key={key}>
+                                {person.id} {PersonService.getPersonsFirstAndLastName(person)}
+                            </option>
                         )
                     })
                 }
@@ -135,12 +168,17 @@ export default function PostForm() {
             <br />
 
             <label>Äiti</label><br/>
-            <select name={"motherId"}>
+            <select name={"motherId"} defaultValue={fatherId ?? "null"}>
                 <option value={"null"}>Valitse</option>
                 {
                     personList?.map((person, key) => {
+                        if (person.id == id) {
+                            return null;
+                        }
                         return (
-                            <option value={person.id} key={key}>{person.id} {PersonService.getPersonsFirstAndLastName(person)}</option>
+                            <option value={person.id} key={key}>
+                                {person.id} {PersonService.getPersonsFirstAndLastName(person)}
+                            </option>
                         )
                     })
                 }
@@ -148,37 +186,37 @@ export default function PostForm() {
             <br />
 
             <label>Sukupuoli</label><br/>
-            <select name={"gender"} id={"gender"}>
+            <select name={"gender"} id={"gender"} defaultValue={person.gender ?? "null"}>
                 <option value={"null"}>-</option>
                 <option value={"MALE"}>Mies</option>
                 <option value={"FEMALE"}>Nainen</option>
             </select><br/>
             <br/>
             <label>Syntymävuosi</label><br/>
-            <input type={"number"} name={"birthYear"} placeholder={"####"}/><br/>
+            <input type={"number"} name={"birthYear"} placeholder={"####"} defaultValue={person.birthYear}/><br/>
             <br/>
 
             <label>Syntymäpaikka</label><br/>
-            <input type={"text"} name={"birthPlace"} placeholder={"Sijainti"}/><br/>
+            <input type={"text"} name={"birthPlace"} placeholder={"Sijainti"} defaultValue={person.birthPlace}/><br/>
             <br/>
 
             <label>Kuollut</label><br/>
-            <input type={"checkbox"} name={"deceased"} defaultChecked={false}/><br/>
+            <input type={"checkbox"} name={"deceased"} defaultChecked={person.deceased}/><br/>
             <br/>
 
             <label>Kuolinvuosi</label><br/>
-            <input type={"number"} name={"deathYear"} placeholder={"####"}/><br/>
+            <input type={"number"} name={"deathYear"} placeholder={"####"} defaultValue={person.deathYear}/><br/>
             <br/>
 
             <label>Kuolinpaikka</label><br/>
-            <input type={"text"} name={"deathPlace"} placeholder={"Sijainti"}/><br/>
+            <input type={"text"} name={"deathPlace"} placeholder={"Sijainti"} defaultValue={person.deathPlace}/><br/>
             <br/>
 
             <label>Lisätiedot</label><br/>
             <FormAdditionalInfoPool infos={additionalInfos} setInfos={setAdditionalInfos}/>
             <br/>
 
-            <label>Tallenna sukulainen tietokantaan</label><br />
+            <label>Tallenna muutokset tietokantaan</label><br />
             <input type={"submit"} value={"Tallenna"}/>
         </form>
     )

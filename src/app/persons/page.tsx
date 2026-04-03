@@ -12,7 +12,9 @@ export default function PersonsPage() {
                     <AllPersonsTable />
 
                     <h2>LISÄVAIHTOEHDOT</h2>
-                    <Link href={"/persons/post"}><u>Lisää sukulainen</u></Link>
+                    <ul>
+                        <li><Link href={"/persons/post"}><u>Lisää sukulainen</u></Link></li>
+                    </ul>
                 </div>
             </main>
         </div>

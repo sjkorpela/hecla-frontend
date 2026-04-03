@@ -37,10 +37,6 @@ export default function AllPersonsTableItem({ id }: Props) {
         return null;
     }
 
-    // console.log(person.id, "PERSON:", person);
-    // console.log(person.fatherId, "FATHER:", father);
-    // console.log(person.motherId, "MOTHER:", mother)
-
     const personName = PersonService.getPersonsFirstAndLastName(person)
 
     const birthYear = person.birthYear ?? "N/A"
@@ -48,6 +44,8 @@ export default function AllPersonsTableItem({ id }: Props) {
 
     const fatherName = PersonService.getPersonsFirstAndLastName(father);
     const motherName = PersonService.getPersonsFirstAndLastName(mother);
+
+    console.log(person.id, person, personName, person.firstNames.filter(fn => fn.nickname)[0])
 
     return (
         <tr /* onClick={() => redirect(`/persons/${person.id}`)} */>
