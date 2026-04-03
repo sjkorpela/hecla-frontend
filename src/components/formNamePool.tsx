@@ -30,13 +30,18 @@ export default function FormNamePool({ names, setNames, placeholder }: Props) {
                 names.map((name, key) => {
                     return (
                         <div key={key}>
-                            <input type={"text"} defaultValue={name} placeholder={placeholder} onChange={(e) => updateName(e, key)}/>
+                            <input
+                                type={"text"}
+                                defaultValue={name}
+                                placeholder={placeholder}
+                                onChange={(e) => updateName(e, key)}
+                            />
                             <button type={"button"} onClick={() => deleteName(key)}>X</button>
                         </div>
                     )
                 })
             }
-            <button type={"button"} onClick={addName}>+</button>
+            <button type={"button"} onClick={addName}>Lisää nimi</button>
         </div>
     )
 }

@@ -217,7 +217,7 @@ export default function PutForm({ id }: Props) {
             <br/>
 
             <label>Tallenna muutokset tietokantaan</label><br />
-            <input type={"submit"} value={"Tallenna"}/><br />
+            <input type={"submit"} value={"Tallenna"} name={"put"}/><br />
             <br />
             <br />
             <br />

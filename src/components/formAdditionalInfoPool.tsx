@@ -11,15 +11,6 @@ export default function FormAdditionalInfoPool({ infos, setInfos }: Props) {
         setInfos([...infos, {key: "", value: ""}])
     }
 
-    // function updateInfo(e:  ChangeEvent<HTMLInputElement, HTMLInputElement>, index: number) {
-    //     setInfos(infos.map((n, i) => {
-    //         if (i == index) {
-    //             return e.target.value;
-    //         }
-    //         return n;
-    //     }));
-    // }
-
     function updateInfoKey(e:  ChangeEvent<HTMLInputElement, HTMLInputElement>, index: number) {
         setInfos(infos.map((info, i) => {
             if (i == index) {
@@ -54,14 +45,25 @@ export default function FormAdditionalInfoPool({ infos, setInfos }: Props) {
                 infos.map((info, key) => {
                     return (
                         <div key={key}>
-                            <input type={"text"} defaultValue={info.key} placeholder={"Nimike"} onChange={(e) => updateInfoKey(e, key)}/>
-                            <input type={"text"} defaultValue={info.value} placeholder={"Lisätieto"} onChange={(e) => updateInfoValue(e, key)}/>
-                            <button type={"button"} onClick={() => deleteInfo(key)}>X</button>
+                            <input
+                                type={"text"}
+                                defaultValue={info.key}
+                                placeholder={"Nimike"}
+                                onChange={(e) => updateInfoKey(e, key)}
+                            />
+                            <input
+                                type={"text"}
+                                defaultValue={info.value}
+                                placeholder={"Lisätieto"}
+                                onChange={(e) => updateInfoValue(e, key)}
+                            />
+                            <button
+                                type={"button"} onClick={() => deleteInfo(key)}>X</button>
                         </div>
                     )
                 })
             }
-            <button type={"button"} onClick={addInfo}>+</button>
+            <button type={"button"} onClick={addInfo}>Lisää lisätieto</button>
         </div>
     )
 }

@@ -67,7 +67,7 @@ export default function DeleteForm({ id }: Props) {
             <br/>
 
             <label>Poista sukulainen</label><br />
-            <input type={"submit"} value={"Poista"}/>
+            <input type={"submit"} value={"Poista"} name={"delete"}/>
         </form>
     )
 }

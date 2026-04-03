@@ -176,7 +176,7 @@ export default function PostForm() {
             <br/>
 
             <label>Tallenna sukulainen tietokantaan</label><br />
-            <input type={"submit"} value={"Tallenna"}/>
+            <input type={"submit"} value={"Tallenna"} name={"post"}/>
         </form>
     )
 }
