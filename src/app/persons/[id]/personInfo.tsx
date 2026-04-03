@@ -96,8 +96,8 @@ export default function PersonInfo({ id }: Props) {
             <br />
             <h2>VANHEMMAT</h2>
             <ul>
-                <li>{ father ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</li>
-                <li>{ mother ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>
+                <li>{father?.id ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</li>
+                <li>{mother?.id ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>
             </ul>
             <br />
             <h2>LISÄVAIHTOEHDOT</h2>

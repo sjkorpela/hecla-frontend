@@ -1,5 +1,3 @@
-"use client";
-
 import {Person} from "@/types/person";
 import {PersonService} from "@/services/personService";
 import Link from "next/dist/client/link";
@@ -7,33 +5,14 @@ import {useEffect, useState} from "react";
 import {redirect} from "next/navigation";
 
 interface Props {
-    id: number
+    person: Person,
+    father: Person | null,
+    mother: Person | null
 }
 
-export default function AllPersonsTableItem({ id }: Props) {
+export default function AllPersonsTableItem({ person, father, mother }: Props) {
 
-    const [person, setPerson] = useState<Person | null>(null);
-    const [father, setFather] = useState<Person | null>(null);
-    const [mother, setMother] = useState<Person | null>(null);
-
-    useEffect(() => {
-        if (id != null) {
-            PersonService.getPersonById(id).then(setPerson);
-        }
-    }, [id]);
-
-    useEffect(() => {
-        if (person != null) {
-            if (person.fatherId != null) {
-                PersonService.getPersonById(person.fatherId).then(setFather);
-            }
-            if (person.motherId != null) {
-                PersonService.getPersonById(person.motherId).then(setMother);
-            }
-        }
-    }, [person]);
-
-    if (id == null || person == null) {
+    if (person == null) {
         return null;
     }
 

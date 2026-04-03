@@ -28,8 +28,15 @@ export default function AllPersonsTable() {
             <tbody>
                 {
                     personList?.map(person => {
+                        const f = personList?.filter(p => p.id == person.fatherId)[0]
+                        const m = personList?.filter(p => p.id == person.motherId)[0]
                         return (
-                            <AllPersonsTableItem id={person.id} key={person.id}/>
+                            <AllPersonsTableItem
+                                person={person}
+                                father={f}
+                                mother={m}
+                                key={person.id}
+                            />
                         )
                     })
                 }
