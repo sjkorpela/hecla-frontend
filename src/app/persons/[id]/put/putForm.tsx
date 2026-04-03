@@ -9,6 +9,7 @@ import {PostPerson} from "@/types/postPerson";
 import {FirstName} from "@/types/firstName";
 import {LastName} from "@/types/lastName";
 import FormAdditionalInfoPool from "@/components/formAdditionalInfoPool";
+import Link from "next/link";
 
 interface Props {
     id: number
@@ -27,14 +28,11 @@ export default function PutForm({ id }: Props) {
 
     useEffect(() => {
         (async () => {
-            console.log("ID", id)
             if (id == null) {
                 return;
             }
             const p: Person = await PersonService.getPersonById(id);
             const pl: Person[] = await PersonService.getAllPersons();
-
-            console.log(p)
 
             setPerson(p);
             setFatherId(p.fatherId);
@@ -123,6 +121,7 @@ export default function PutForm({ id }: Props) {
 
             <label>Kutsumanimi</label><br/>
             <select name={"nickname"}>
+                <option value={-1}>Valitse</option>
                 {
                     firstNames.map((fn, key) => {
                         return (
@@ -139,10 +138,11 @@ export default function PutForm({ id }: Props) {
 
             <label>Käytössä</label><br/>
             <select name={"current"}>
+                <option value={-1}>Valitse</option>
                 {
                     lastNames.map((ln, key) => {
                         return (
-                            <option value={ln} key={key}>{ln}</option>
+                            <option value={key} key={key}>{ln}</option>
                         )
                     })
                 }
@@ -187,7 +187,7 @@ export default function PutForm({ id }: Props) {
 
             <label>Sukupuoli</label><br/>
             <select name={"gender"} id={"gender"} defaultValue={person.gender ?? "null"}>
-                <option value={"null"}>-</option>
+                <option value={"null"}>Valitse</option>
                 <option value={"MALE"}>Mies</option>
                 <option value={"FEMALE"}>Nainen</option>
             </select><br/>
@@ -217,7 +217,13 @@ export default function PutForm({ id }: Props) {
             <br/>
 
             <label>Tallenna muutokset tietokantaan</label><br />
-            <input type={"submit"} value={"Tallenna"}/>
+            <input type={"submit"} value={"Tallenna"}/><br />
+            <br />
+            <br />
+            <br />
+
+            <h2>LISÄVAIHTOEHDOT</h2>
+            <li><Link href={`/persons/${id}/delete`}><u>Poista sukulainen</u></Link></li>
         </form>
     )
 }

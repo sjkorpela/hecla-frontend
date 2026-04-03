@@ -37,6 +37,8 @@ export default function PersonInfo({ id }: Props) {
         return null;
     }
 
+    console.log(person)
+
     const personName = PersonService.getPersonsFirstAndLastName(person)
 
     let allFirstNames = ""
@@ -103,7 +105,6 @@ export default function PersonInfo({ id }: Props) {
             <h2>LISÄVAIHTOEHDOT</h2>
             <ul>
                 <li><Link href={`/persons/${id}/put`}><u>Muokkaa sukulaista</u></Link></li>
-                <li><Link href={`/persons/${id}/delete`}><u>Poista sukulainen</u></Link></li>
             </ul>
         </div>
     )

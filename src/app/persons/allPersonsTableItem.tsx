@@ -45,8 +45,6 @@ export default function AllPersonsTableItem({ id }: Props) {
     const fatherName = PersonService.getPersonsFirstAndLastName(father);
     const motherName = PersonService.getPersonsFirstAndLastName(mother);
 
-    console.log(person.id, person, personName, person.firstNames.filter(fn => fn.nickname)[0])
-
     return (
         <tr /* onClick={() => redirect(`/persons/${person.id}`)} */>
             <td><Link href={`/persons/${person.id}`}><u>{personName}</u></Link></td>

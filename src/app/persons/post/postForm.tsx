@@ -149,7 +149,7 @@ export default function PostForm() {
 
             <label>Sukupuoli</label><br/>
             <select name={"gender"} id={"gender"}>
-                <option value={"null"}>-</option>
+                <option value={"null"}>Valitse</option>
                 <option value={"MALE"}>Mies</option>
                 <option value={"FEMALE"}>Nainen</option>
             </select><br/>

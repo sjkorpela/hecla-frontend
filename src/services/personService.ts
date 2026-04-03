@@ -62,12 +62,25 @@ export class PersonService {
         return response.status;
     }
 
+    public static async deletePerson(id: number): Promise<number> {
+        if (keycloak.isTokenExpired()) {
+            await keycloak.login();
+        }
+        const response = await fetch(`${ENDPOINTS.PERSONS}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${keycloak.token}`,
+            },
+        });
+        return response.status;
+    }
+
     public static getPersonsNickname(firstNames: FirstName[]): string | null {
         if (firstNames == null) {
             return null;
         }
         const temp = firstNames.filter(fn => fn.nickname);
-        return temp.length > 0 ? temp[0].name : null;
+        return temp.length > 0 && temp[0].name != "" ? temp[0].name : null;
     }
 
     public static getPersonsCurrentLastName(lastNames: LastName[]): string | null {
@@ -75,16 +88,16 @@ export class PersonService {
             return null;
         }
         const temp = lastNames.filter(ln => ln.current);
-        return temp.length > 0 ? temp[0].name : null;
+        return temp.length > 0 && temp[0].name != "" ? temp[0].name : null;
     }
 
     public static getPersonsFirstAndLastName(person: Person | null): string | null {
         if (person == null) {
             return null;
         }
-        let personName = PersonService.getPersonsNickname(person.firstNames) ?? "N/A"
-        personName += " "
-        personName += PersonService.getPersonsCurrentLastName(person.lastNames) ?? "N/A"
-        return personName;
+        const firstName = PersonService.getPersonsNickname(person.firstNames) ?? "N/A";
+        const lastName = PersonService.getPersonsCurrentLastName(person.lastNames) ?? "N/A";
+
+        return `${firstName} ${lastName}`;
     }
 }
