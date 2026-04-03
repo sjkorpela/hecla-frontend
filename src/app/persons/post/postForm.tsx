@@ -12,14 +12,9 @@ import {LastName} from "@/types/lastName";
 
 export default function PostForm() {
 
-    const [firstNames, setFirstnames] = useState<string[]>([""])
-    const [lastNames, setLastNames] = useState<string[]>([""])
-    const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([
-        {
-            key: "",
-            value: ""
-        }
-    ])
+    const [firstNames, setFirstnames] = useState<string[]>([])
+    const [lastNames, setLastNames] = useState<string[]>([])
+    const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([])
 
     const [personList, setPersonList] = useState<Person[] | null>(null);
 
@@ -95,6 +90,7 @@ export default function PostForm() {
 
             <label>Kutsumanimi</label><br/>
             <select name={"nickname"}>
+                <option value={-1}>Valitse</option>
                 {
                     firstNames.map((fn, key) => {
                         return (
@@ -111,6 +107,7 @@ export default function PostForm() {
 
             <label>Käytössä</label><br/>
             <select name={"current"}>
+                <option value={-1}>Valitse</option>
                 {
                     lastNames.map((ln, key) => {
                         return (

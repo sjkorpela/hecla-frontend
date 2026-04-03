@@ -10,7 +10,7 @@ export default async function PersonPutPage({ params }: { params: Promise<{ id: 
         <div className={styles.page}>
             <main className={styles.main}>
                 <div className={styles.intro}>
-                    <Link href={`/persons/${id}`}>{"<"} Takaisin</Link>
+                    <Link href={`/persons/${id}`}><u>{"<"} Takaisin</u></Link>
                     <PutForm id={id} />
                 </div>
             </main>

@@ -10,7 +10,7 @@ export default async function PersonDeletePage({ params }: { params: Promise<{ i
         <div className={styles.page}>
             <main className={styles.main}>
                 <div className={styles.intro}>
-                    <Link href={`/persons/${id}`}>{"<"} Takaisin</Link>
+                    <Link href={`/persons/${id}`}><u>{"<"} Takaisin</u></Link>
                     <h1>POISTA SUKULAINEN</h1>
                     <DeleteForm id={id} />
                 </div>

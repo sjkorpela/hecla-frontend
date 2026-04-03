@@ -8,7 +8,7 @@ export default function PersonsPage() {
         <div className={styles.page}>
             <main className={styles.main}>
                 <div className={styles.intro}>
-                    <Link href={"/persons"}>{"<"} Takaisin</Link>
+                    <Link href={"/persons"}><u>{"<"} Takaisin</u></Link>
                     <h1>UUSI SUKULAINEN</h1>
                     <PostForm />
                 </div>

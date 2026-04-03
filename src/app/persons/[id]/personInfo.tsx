@@ -37,8 +37,6 @@ export default function PersonInfo({ id }: Props) {
         return null;
     }
 
-    console.log(person)
-
     const personName = PersonService.getPersonsFirstAndLastName(person)
 
     let allFirstNames = ""

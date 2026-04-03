@@ -11,7 +11,7 @@ export default async function PersonPage({ params }: { params: Promise<{ id: num
         <div className={styles.page}>
             <main className={styles.main}>
                 <div className={styles.intro}>
-                    <Link href={"/persons"}>{"<"} Takaisin</Link>
+                    <Link href={"/persons"}><u>{"<"} Takaisin</u></Link>
                     <PersonInfo id={id} />
                 </div>
             </main>

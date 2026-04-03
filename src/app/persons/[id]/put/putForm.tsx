@@ -120,7 +120,7 @@ export default function PutForm({ id }: Props) {
             <br/>
 
             <label>Kutsumanimi</label><br/>
-            <select name={"nickname"}>
+            <select name={"nickname"} defaultValue={firstNames.indexOf(PersonService.getPersonsNickname(person.firstNames) ?? "")}>
                 <option value={-1}>Valitse</option>
                 {
                     firstNames.map((fn, key) => {
@@ -137,7 +137,7 @@ export default function PutForm({ id }: Props) {
             <br/>
 
             <label>Käytössä</label><br/>
-            <select name={"current"}>
+            <select name={"current"} defaultValue={lastNames.indexOf(PersonService.getPersonsCurrentLastName(person.lastNames) ?? "")}>
                 <option value={-1}>Valitse</option>
                 {
                     lastNames.map((ln, key) => {
@@ -168,7 +168,7 @@ export default function PutForm({ id }: Props) {
             <br />
 
             <label>Äiti</label><br/>
-            <select name={"motherId"} defaultValue={fatherId ?? "null"}>
+            <select name={"motherId"} defaultValue={motherId ?? "null"}>
                 <option value={"null"}>Valitse</option>
                 {
                     personList?.map((person, key) => {
