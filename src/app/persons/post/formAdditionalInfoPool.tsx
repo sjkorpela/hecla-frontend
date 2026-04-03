@@ -54,8 +54,8 @@ export default function FormAdditionalInfoPool({ infos, setInfos }: Props) {
                 infos.map((info, key) => {
                     return (
                         <div key={key}>
-                            <input type={"text"} defaultValue={info.key} onChange={(e) => updateInfoKey(e, key)}/>
-                            <input type={"text"} defaultValue={info.value} onChange={(e) => updateInfoValue(e, key)}/>
+                            <input type={"text"} defaultValue={info.key} placeholder={"Nimike"} onChange={(e) => updateInfoKey(e, key)}/>
+                            <input type={"text"} defaultValue={info.value} placeholder={"Lisätieto"} onChange={(e) => updateInfoValue(e, key)}/>
                             <button type={"button"} onClick={() => deleteInfo(key)}>X</button>
                         </div>
                     )

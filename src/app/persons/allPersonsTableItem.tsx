@@ -41,30 +41,17 @@ export default function AllPersonsTableItem({ id }: Props) {
     // console.log(person.fatherId, "FATHER:", father);
     // console.log(person.motherId, "MOTHER:", mother)
 
-    const firstName = PersonService.getPersonsNickname(person.firstNames) ?? person.firstNames[0].name ?? "N/A"
-    const lastName = PersonService.getPersonsCurrentLastName(person.lastNames) ?? person.lastNames[0].name ?? "N/A"
+    const personName = PersonService.getPersonsFirstAndLastName(person)
 
     const birthYear = person.birthYear ?? "N/A"
     const deathYear = person.deathYear ?? ""
 
-    let fatherName = null
-    let motherName = null
-
-    if (father) {
-        fatherName = PersonService.getPersonsNickname(father.firstNames) ?? father.firstNames[0].name ?? "N/A"
-        fatherName += " "
-        fatherName += PersonService.getPersonsCurrentLastName(father.lastNames) ?? father.lastNames[0].name ?? "-."
-    }
-
-    if (mother) {
-        motherName = PersonService.getPersonsNickname(mother.firstNames) ?? mother.firstNames[0].name ?? "N/A"
-        motherName += " "
-        motherName += PersonService.getPersonsCurrentLastName(mother.lastNames) ?? mother.lastNames[0].name ?? "-."
-    }
+    const fatherName = PersonService.getPersonsFirstAndLastName(father);
+    const motherName = PersonService.getPersonsFirstAndLastName(mother);
 
     return (
         <tr /* onClick={() => redirect(`/persons/${person.id}`)} */>
-            <td><Link href={`/persons/${person.id}`}><u>{firstName} {lastName}</u></Link></td>
+            <td><Link href={`/persons/${person.id}`}><u>{personName}</u></Link></td>
             <td>{birthYear}-{deathYear}</td>
             <td>{father ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</td>
             <td>{mother ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</td>

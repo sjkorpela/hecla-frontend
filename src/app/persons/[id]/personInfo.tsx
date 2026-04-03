@@ -37,8 +37,7 @@ export default function PersonInfo({ id }: Props) {
         return null;
     }
 
-    const firstName = PersonService.getPersonsNickname(person.firstNames) ?? person.firstNames[0].name ?? "N/A"
-    const lastName = PersonService.getPersonsCurrentLastName(person.lastNames) ?? person.lastNames[0].name ?? "N/A"
+    const personName = PersonService.getPersonsFirstAndLastName(person)
 
     let allFirstNames = ""
     for (let i = 0; i < person.firstNames.length; i++) {
@@ -65,28 +64,12 @@ export default function PersonInfo({ id }: Props) {
     const birthInfo = `${person.birthYear ?? "N/A"}, ${person.birthPlace ?? "N/A"}`
     const deathInfo = `${person.deathYear ?? "N/A"}, ${person.deathPlace ?? "N/A"}`
 
-    let fatherName = ""
-    let motherName = ""
-
-    if (father) {
-        fatherName += PersonService.getPersonsNickname(father.firstNames) ?? father.firstNames[0].name ?? "N/A"
-        fatherName += " "
-        fatherName += PersonService.getPersonsCurrentLastName(father.lastNames) ?? father.lastNames[0].name ?? "-."
-    } else {
-        fatherName = "N/A"
-    }
-
-    if (mother) {
-        motherName += PersonService.getPersonsNickname(mother.firstNames) ?? mother.firstNames[0].name ?? "N/A"
-        motherName += " "
-        motherName += PersonService.getPersonsCurrentLastName(mother.lastNames) ?? mother.lastNames[0].name ?? "-."
-    } else {
-        motherName = "N/A"
-    }
+    const fatherName = PersonService.getPersonsFirstAndLastName(father);
+    const motherName = PersonService.getPersonsFirstAndLastName(mother);
 
     return (
         <div>
-            <h1>{firstName.toUpperCase()} {lastName.toUpperCase()}</h1>
+            <h1>{personName?.toUpperCase() ?? "N/A"}</h1>
             <br />
             <h2>Perustiedot</h2>
             <ul>
@@ -117,10 +100,7 @@ export default function PersonInfo({ id }: Props) {
                 <li>{ mother ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>
             </ul>
             <br />
-            <h2>SISARUKSET</h2>
-            <p>tba</p>
-            <br />
-            <h2>LAPSET</h2>
+            <h2>LISÄVAIHTOEHDOT</h2>
             <p>tba</p>
             <br />
         </div>

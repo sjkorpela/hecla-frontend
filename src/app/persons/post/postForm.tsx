@@ -16,8 +16,8 @@ export default function PostForm() {
     const [lastNames, setLastNames] = useState<string[]>([""])
     const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([
         {
-            key: "Kengänkoko",
-            value: "40"
+            key: "",
+            value: ""
         }
     ])
 
@@ -29,15 +29,9 @@ export default function PostForm() {
         }
     }, [personList]);
 
-    function formSubmit(e) {
+    async function formSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         const form = new FormData(e.target);
-        // console.log(form.get("gender") == "null");
-        if (form.get("gender") == "null") {
-
-        }
-
-        console.log(form)
 
         const postFirstNames: FirstName[] = firstNames.map((n, i) => {
             if (i == Number(form.get("nickname"))) {
@@ -81,11 +75,20 @@ export default function PostForm() {
             additionalInfos: additionalInfos
         }
 
-        console.log("POST", person)
+        // console.log("POST", person)
+        const result = await PersonService.postPerson(person);
+        // console.log("RESPONSE", result)
+
+        if (result.id != null) {
+            alert("Sukulainen tallennettu tietokantaan tunnuksella: " + result.id);
+        } else {
+            alert("Jokin meni vikaan?")
+        }
+
     }
 
     return (
-        <form onSubmit={formSubmit}>
+        <form onSubmit={(e) => formSubmit(e)}>
             <label>Etunimet</label><br/>
             <FormNamePool names={firstNames} setNames={setFirstnames} placeholder={"Etunimi"}/>
             <br/>
@@ -152,11 +155,11 @@ export default function PostForm() {
             </select><br/>
             <br/>
             <label>Syntymävuosi</label><br/>
-            <input type={"number"} name={"birthYear"} defaultValue={2000}/><br/>
+            <input type={"number"} name={"birthYear"} placeholder={"####"}/><br/>
             <br/>
 
             <label>Syntymäpaikka</label><br/>
-            <input type={"text"} name={"birthPlace"} defaultValue={"Joku sairaala"}/><br/>
+            <input type={"text"} name={"birthPlace"} placeholder={"Sijainti"}/><br/>
             <br/>
 
             <label>Kuollut</label><br/>
@@ -164,11 +167,11 @@ export default function PostForm() {
             <br/>
 
             <label>Kuolinvuosi</label><br/>
-            <input type={"number"} name={"deathYear"} defaultValue={2000}/><br/>
+            <input type={"number"} name={"deathYear"} placeholder={"####"}/><br/>
             <br/>
 
             <label>Kuolinpaikka</label><br/>
-            <input type={"text"} name={"deathPlace"} defaultValue={"Joku eri sairaala"}/><br/>
+            <input type={"text"} name={"deathPlace"} placeholder={"Sijainti"}/><br/>
             <br/>
 
             <label>Lisätiedot</label><br/>

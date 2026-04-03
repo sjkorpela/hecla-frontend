@@ -3,6 +3,7 @@ import keycloak, { initKeycloak } from "@/lib/keycloak";
 import {Person} from "@/types/person";
 import {FirstName} from "@/types/firstName";
 import {LastName} from "@/types/lastName";
+import {PostPerson} from "@/types/postPerson";
 
 export class PersonService {
     public static async getAllPersons(): Promise<Person[]> {
@@ -26,6 +27,21 @@ export class PersonService {
         const response = await fetch(`${ENDPOINTS.PERSONS}/${id}`, {
             headers: {
                 Authorization: `Bearer ${keycloak.token}`,
+            },
+        });
+        return await response.json();
+    }
+
+    public static async postPerson(person: PostPerson): Promise<Person> {
+        if (keycloak.isTokenExpired()) {
+            await keycloak.login();
+        }
+        const response = await fetch(ENDPOINTS.PERSONS, {
+            method: "POST",
+            body: JSON.stringify(person),
+            headers: {
+                Authorization: `Bearer ${keycloak.token}`,
+                "Content-Type": "application/json",
             },
         });
         return await response.json();
@@ -55,13 +71,13 @@ export class PersonService {
         return null;
     }
 
-    public static getPersonsFirstAndLastName(person: Person): String | null {
+    public static getPersonsFirstAndLastName(person: Person | null): string | null {
         if (person == null) {
             return null;
         }
-        let personName = PersonService.getPersonsNickname(person.firstNames) ?? person.firstNames[0].name ?? "N/A"
+        let personName = PersonService.getPersonsNickname(person.firstNames) ?? person.firstNames[0]?.name ?? "N/A"
         personName += " "
-        personName += PersonService.getPersonsCurrentLastName(person.lastNames) ?? person.lastNames[0].name ?? "N/A"
+        personName += PersonService.getPersonsCurrentLastName(person.lastNames) ?? person.lastNames[0]?.name ?? "N/A"
         return personName;
     }
 }

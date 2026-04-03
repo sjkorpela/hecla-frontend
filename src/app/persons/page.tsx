@@ -11,12 +11,6 @@ export default function PersonsPage() {
                     <h2>SUKULAISET</h2>
                     <AllPersonsTable />
 
-                    <h2>HAKU</h2>
-                    <p>tba</p>
-
-                    <h2>SUODATUS</h2>
-                    <p>tba</p>
-
                     <h2>LISÄVAIHTOEHDOT</h2>
                     <Link href={"/persons/post"}><u>Lisää sukulainen</u></Link>
                 </div>
