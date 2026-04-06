@@ -5,6 +5,7 @@ import {PersonService} from "@/services/personService";
 import {useEffect, useState} from "react";
 import AdditionalInfoItem from "@/app/persons/[id]/additionalInfoItem";
 import Link from "next/dist/client/link";
+import usePerson from "@/hooks/usePerson";
 
 interface Props {
     id: number
@@ -12,26 +13,9 @@ interface Props {
 
 export default function PersonInfo({ id }: Props) {
 
-    const [person, setPerson] = useState<Person | null>(null);
-    const [father, setFather] = useState<Person | null>(null);
-    const [mother, setMother] = useState<Person | null>(null);
-
-    useEffect(() => {
-        if (id != null) {
-            PersonService.getPersonById(id).then(setPerson);
-        }
-    }, [id]);
-
-    useEffect(() => {
-        if (person != null) {
-            if (person.fatherId != null) {
-                PersonService.getPersonById(person.fatherId).then(setFather);
-            }
-            if (person.motherId != null) {
-                PersonService.getPersonById(person.motherId).then(setMother);
-            }
-        }
-    }, [person]);
+    const { loading, person, status } = usePerson(id)
+    const { loading: fatherLoading, person: father, status: fatherStatus } = usePerson(person?.fatherId)
+    const { loading: motherLoading, person: mother, status: motherStatus } = usePerson(person?.motherId)
 
     if (id == null || person == null) {
         return null;
@@ -87,7 +71,6 @@ export default function PersonInfo({ id }: Props) {
                         return (
                             <div key={key}>
                                 <AdditionalInfoItem info={ai} />
-                                <br />
                             </div>
                         )
                     })
@@ -96,8 +79,8 @@ export default function PersonInfo({ id }: Props) {
             <br />
             <h2>VANHEMMAT</h2>
             <ul>
-                <li>{father?.id ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</li>
-                <li>{mother?.id ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>
+                <li>{father != null ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</li>
+                <li>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>
             </ul>
             <br />
             <h2>LISÄVAIHTOEHDOT</h2>

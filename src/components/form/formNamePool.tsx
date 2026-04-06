@@ -1,11 +1,13 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import {test} from "@playwright/test";
 
 interface Props {
     names: string[]
     setNames: Dispatch<SetStateAction<string[]>>
     placeholder: string
+    testingId: string
 }
-export default function FormNamePool({ names, setNames, placeholder }: Props) {
+export default function FormNamePool({ names, setNames, placeholder, testingId }: Props) {
 
     function addName() {
         setNames([...names, ""])
@@ -35,13 +37,22 @@ export default function FormNamePool({ names, setNames, placeholder }: Props) {
                                 defaultValue={name}
                                 placeholder={placeholder}
                                 onChange={(e) => updateName(e, key)}
+                                name={testingId}
                             />
-                            <button type={"button"} onClick={() => deleteName(key)}>X</button>
+                            <button
+                                type={"button"}
+                                onClick={() => deleteName(key)}
+                                name={`${testingId}_delete`}
+                            >X</button>
                         </div>
                     )
                 })
             }
-            <button type={"button"} onClick={addName}>Lisää nimi</button>
+            <button
+                type={"button"}
+                onClick={addName}
+                name={`${testingId}_new`}
+            >Lisää nimi</button>
         </div>
     )
 }

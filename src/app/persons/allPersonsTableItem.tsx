@@ -28,8 +28,8 @@ export default function AllPersonsTableItem({ person, father, mother }: Props) {
         <tr /* onClick={() => redirect(`/persons/${person.id}`)} */>
             <td><Link href={`/persons/${person.id}`}><u>{personName}</u></Link></td>
             <td>{birthYear}-{deathYear}</td>
-            <td>{father?.id ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</td>
-            <td>{mother?.id ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</td>
+            <td>{father != null ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</td>
+            <td>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</td>
         </tr>
     )
 }

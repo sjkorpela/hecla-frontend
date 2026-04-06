@@ -1,35 +1,54 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import FormNamePool from "@/components/formNamePool";
-import FormAdditionalInfoPool from '../../../components/formAdditionalInfoPool';
+import FormNamePool from "@/components/form/formNamePool";
+import FormAdditionalInfoPool from '../../../components/form/formAdditionalInfoPool';
 import {AdditionalInfo} from "@/types/additionalInfo";
 import {Person} from "@/types/person";
 import {PersonService} from "@/services/personService";
 import {PostPerson} from "@/types/postPerson";
 import {FirstName} from "@/types/firstName";
 import {LastName} from "@/types/lastName";
+import {Gender} from "@/types/gender";
+import useAllPersons from "@/hooks/useAllPersons";
+import FormNameSelect from "@/components/form/formNameSelect";
+import FormPersonSelect from "@/components/form/formPersonSelect";
+import FormGenderSelect from "@/components/form/formGenderSelect";
+import FormYearInput from "@/components/form/formYearInput";
+import FormTextInput from "@/components/form/formTextInput";
+import FormCheckbox from "@/components/form/formCheckbox";
+import {redirect} from "next/navigation";
 
 export default function PostForm() {
 
+    const { loading, personArray, status } = useAllPersons()
+
     const [firstNames, setFirstnames] = useState<string[]>([])
+    const [nickname, setNickname] = useState<number | null>(null);
+
     const [lastNames, setLastNames] = useState<string[]>([])
+    const [current, setCurrent] = useState<number | null>(null);
+
+    const [fatherId, setFatherId] = useState<number | null>(null)
+    const [motherId, setMotherId] = useState<number | null>(null)
+
+    const [gender, setGender] = useState<Gender | null>(null)
+
+    const [birthYear, setBirthYear] = useState<number | null>(null)
+    const [birthPlace, setBirthPlace] = useState<string | null>(null)
+
+    const [deceased, setDeceased] = useState<boolean | null>(null)
+
+    const [deathYear, setDeathYear] = useState<number | null>(null)
+    const [deathPlace, setDeathPlace] = useState<string | null>(null)
+
     const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([])
-
-    const [personList, setPersonList] = useState<Person[] | null>(null);
-
-    useEffect(() => {
-        if (personList == null) {
-            PersonService.getAllPersons().then(setPersonList);
-        }
-    }, [personList]);
 
     async function formSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-        const form = new FormData(e.target);
 
         const postFirstNames: FirstName[] = firstNames.map((n, i) => {
-            if (i == Number(form.get("nickname"))) {
+            if (i == nickname) {
                 return {
                     name: n,
                     nickname: true
@@ -43,7 +62,7 @@ export default function PostForm() {
         })
 
         const postLastNames: LastName[] = lastNames.map((n, i) => {
-            if (i == Number(form.get("current"))) {
+            if (i == current) {
                 return {
                     name: n,
                     current: true
@@ -57,122 +76,78 @@ export default function PostForm() {
         })
 
         const person: PostPerson = {
-            fatherId: form.get("fatherId") == "null" ? null : Number(form.get("fatherId")),
-            motherId: form.get("motherId") == "null" ? null : Number(form.get("motherId")),
-            gender: form.get("gender") == "null" ? null : String(form.get("gender")),
-            birthYear: Number(form.get("birthYear")) == 0 ? null : Number(form.get("birthYear")),
-            birthPlace: form.get("birthPlace") == "" ? null : String(form.get("birthPlace")),
-            deceased: form.get("deceased") == "on",
-            deathYear: Number(form.get("deathYear")) == 0 ? null : Number(form.get("deathYear")),
-            deathPlace: form.get("deathPlace") == "" ? null : String(form.get("deathPlace")),
+            fatherId: fatherId,
+            motherId: motherId,
+            gender: gender,
+            birthYear: birthYear,
+            birthPlace: birthPlace,
+            deceased: deceased,
+            deathYear: deathYear,
+            deathPlace: deathPlace,
             firstNames: postFirstNames,
             lastNames: postLastNames,
             additionalInfos: additionalInfos
         }
 
-        // console.log("POST", person)
         const result = await PersonService.postPerson(person);
-        // console.log("RESPONSE", result)
 
-        if (result.id != null) {
-            alert("Sukulainen tallennettu tietokantaan tunnuksella: " + result.id);
-        } else {
-            alert("Jokin meni vikaan?")
+        if (result.status == 201 && result.person != null) {
+            redirect(`/persons/${result.person.id}`)
         }
-
     }
 
     return (
         <form onSubmit={(e) => formSubmit(e)}>
             <label>Etunimet</label><br/>
-            <FormNamePool names={firstNames} setNames={setFirstnames} placeholder={"Etunimi"}/>
+            <FormNamePool names={firstNames} setNames={setFirstnames} placeholder={"Etunimi"} testingId={"firstName"}/>
             <br/>
 
             <label>Kutsumanimi</label><br/>
-            <select name={"nickname"}>
-                <option value={-1}>Valitse</option>
-                {
-                    firstNames.map((fn, key) => {
-                        return (
-                            <option value={key} key={key}>{fn}</option>
-                        )
-                    })
-                }
-            </select><br/>
+            <FormNameSelect names={firstNames} setSelectedName={setNickname} testingId={"nickname"} /><br/>
             <br/>
 
             <label>Sukunimet</label><br/>
-            <FormNamePool names={lastNames} setNames={setLastNames} placeholder={"Sukunimi"}/>
+            <FormNamePool names={lastNames} setNames={setLastNames} placeholder={"Sukunimi"} testingId={"lastName"}/>
             <br/>
 
             <label>Käytössä</label><br/>
-            <select name={"current"}>
-                <option value={-1}>Valitse</option>
-                {
-                    lastNames.map((ln, key) => {
-                        return (
-                            <option value={ln} key={key}>{ln}</option>
-                        )
-                    })
-                }
-            </select><br/>
+            <FormNameSelect names={lastNames} setSelectedName={setCurrent} testingId={"current"} /><br/>
             <br/>
 
             <label>Isä</label><br/>
-            <select name={"fatherId"}>
-                <option value={"null"}>Valitse</option>
-                {
-                    personList?.map((person, key) => {
-                        return (
-                            <option value={person.id} key={key}>{person.id} {PersonService.getPersonsFirstAndLastName(person)}</option>
-                        )
-                    })
-                }
-            </select><br/>
-            <br />
+            <FormPersonSelect persons={personArray} selectedPersonId={fatherId} setSelectedPersonId={setFatherId} testingId={"fatherId"} /><br/>
+            <br/>
 
             <label>Äiti</label><br/>
-            <select name={"motherId"}>
-                <option value={"null"}>Valitse</option>
-                {
-                    personList?.map((person, key) => {
-                        return (
-                            <option value={person.id} key={key}>{person.id} {PersonService.getPersonsFirstAndLastName(person)}</option>
-                        )
-                    })
-                }
-            </select><br/>
-            <br />
+            <FormPersonSelect persons={personArray} selectedPersonId={motherId} setSelectedPersonId={setMotherId} testingId={"motherId"} /><br/>
+            <br/>
 
             <label>Sukupuoli</label><br/>
-            <select name={"gender"} id={"gender"}>
-                <option value={"null"}>Valitse</option>
-                <option value={"MALE"}>Mies</option>
-                <option value={"FEMALE"}>Nainen</option>
-            </select><br/>
+            <FormGenderSelect setSelectedGender={setGender} testingId={"gender"} /><br/>
             <br/>
+
             <label>Syntymävuosi</label><br/>
-            <input type={"number"} name={"birthYear"} placeholder={"####"}/><br/>
+            <FormYearInput year={birthYear} setYear={setBirthYear} testingId={"birthYear"}/><br/>
             <br/>
 
             <label>Syntymäpaikka</label><br/>
-            <input type={"text"} name={"birthPlace"} placeholder={"Sijainti"}/><br/>
+            <FormTextInput text={birthPlace} setText={setBirthPlace} placeholder={"Sijainti"} testingId={"birthPlace"}/><br/>
             <br/>
 
             <label>Kuollut</label><br/>
-            <input type={"checkbox"} name={"deceased"} defaultChecked={false}/><br/>
+            <FormCheckbox state={deceased} setState={setDeceased} testingId={"deceased"}/><br/>
             <br/>
 
             <label>Kuolinvuosi</label><br/>
-            <input type={"number"} name={"deathYear"} placeholder={"####"}/><br/>
+            <FormYearInput year={deathYear} setYear={setDeathYear} testingId={"deathYear"}/><br/>
             <br/>
 
             <label>Kuolinpaikka</label><br/>
-            <input type={"text"} name={"deathPlace"} placeholder={"Sijainti"}/><br/>
+            <FormTextInput text={deathPlace} setText={setDeathPlace} placeholder={"Sijainti"} testingId={"deathPlace"}/><br/>
             <br/>
 
             <label>Lisätiedot</label><br/>
-            <FormAdditionalInfoPool infos={additionalInfos} setInfos={setAdditionalInfos}/>
+            <FormAdditionalInfoPool infos={additionalInfos} setInfos={setAdditionalInfos}/><br/>
             <br/>
 
             <label>Tallenna sukulainen tietokantaan</label><br />

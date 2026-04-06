@@ -1,19 +1,17 @@
 "use client";
 
-import {PersonService} from "@/services/personService";
-import {useEffect, useState} from "react";
-import {Person} from "@/types/person";
 import AllPersonsTableItem from "@/app/persons/allPersonsTableItem";
+import useAllPersons from "@/hooks/useAllPersons";
 
 export default function AllPersonsTable() {
 
-    const [personList, setPersonList] = useState<Person[] | null>(null);
+    const { loading, personArray, status} = useAllPersons();
 
-    useEffect(() => {
-        if (personList == null) {
-            PersonService.getAllPersons().then(setPersonList);
-        }
-    }, [personList]);
+    if (loading) {
+        return (
+            <p>Loading...</p>
+        )
+    }
 
     return (
         <table>
@@ -27,9 +25,9 @@ export default function AllPersonsTable() {
             </thead>
             <tbody>
                 {
-                    personList?.map(person => {
-                        const f = personList?.filter(p => p.id == person.fatherId)[0]
-                        const m = personList?.filter(p => p.id == person.motherId)[0]
+                    personArray?.map(person => {
+                        const f = personArray?.filter(p => p.id == person.fatherId)[0]
+                        const m = personArray?.filter(p => p.id == person.motherId)[0]
                         return (
                             <AllPersonsTableItem
                                 person={person}
