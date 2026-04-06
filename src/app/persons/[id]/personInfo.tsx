@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import AdditionalInfoItem from "@/app/persons/[id]/additionalInfoItem";
 import Link from "next/dist/client/link";
 import usePerson from "@/hooks/usePerson";
+import {redirect} from "next/navigation";
 
 interface Props {
     id: number
@@ -16,6 +17,10 @@ export default function PersonInfo({ id }: Props) {
     const { loading, person, status } = usePerson(id)
     const { loading: fatherLoading, person: father, status: fatherStatus } = usePerson(person?.fatherId)
     const { loading: motherLoading, person: mother, status: motherStatus } = usePerson(person?.motherId)
+
+    if (status == 404) {
+        redirect("/persons")
+    }
 
     if (id == null || person == null) {
         return null;

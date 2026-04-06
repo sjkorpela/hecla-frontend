@@ -50,6 +50,10 @@ export default function PutForm({ id }: Props) {
 
     const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([])
 
+    if (personStatus == 404) {
+        redirect("/persons")
+    }
+
     function getValuesFromPerson(person: Person) {
         setFirstnames(
             person?.firstNames?.map(fn => {

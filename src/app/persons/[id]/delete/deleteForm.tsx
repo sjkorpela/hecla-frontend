@@ -12,6 +12,7 @@ import FormAdditionalInfoPool from "@/components/form/formAdditionalInfoPool";
 import {redirect, useRouter} from "next/navigation";
 import {router} from "next/dist/client";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
+import usePerson from "@/hooks/usePerson";
 
 interface Props {
     id: number
@@ -19,12 +20,11 @@ interface Props {
 
 export default function DeleteForm({ id }: Props) {
 
-    const [person, setPerson] = useState<Person | null>(null);
-    const router: AppRouterInstance = useRouter();
+    const { loading, person, status } = usePerson(id)
 
-    useEffect(() => {
-        PersonService.getPersonById(id).then(setPerson);
-    }, [id]);
+    if (status == 404) {
+        redirect("/persons")
+    }
 
     if (id == null || person == null) {
         return (
