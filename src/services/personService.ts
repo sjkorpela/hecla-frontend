@@ -42,7 +42,7 @@ export class PersonService {
         }
 
         if (sort != null && sort.field != null && sort.direction != null)  {
-            params += `sort=${sort.direction == SortDirection.Desc ? "-" : ""}${sort.field}`
+            params += `sort=${sort.field}${sort.direction == SortDirection.Desc ? ",desc" : ",asc"}`
         }
 
         const response = await fetch(ENDPOINTS.PERSONS + params, {
