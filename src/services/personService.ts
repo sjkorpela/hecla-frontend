@@ -1,5 +1,5 @@
 import {ENDPOINTS} from "@/lib";
-import keycloak, { initKeycloak } from "@/lib/keycloak";
+import keycloak, {initKeycloak} from "@/lib/keycloak";
 import {Person} from "@/types/person";
 import {FirstName} from "@/types/firstName";
 import {LastName} from "@/types/lastName";
@@ -7,6 +7,7 @@ import {PostPerson} from "@/types/postPerson";
 import {Page} from "@/types/page";
 import {PersonsFilter} from "@/types/personsFilter";
 import {PersonsSort} from "@/types/personsSort";
+import {SortDirection} from "@/types/sortDirection";
 
 interface PersonAndStatus {
     person: Person | null,
@@ -29,8 +30,6 @@ export class PersonService {
             await keycloak.login();
         }
 
-        // handle sort & filter
-
         let params = "?";
 
         if (filter != null) {
@@ -40,6 +39,10 @@ export class PersonService {
             if (filter.bornBefore != null) params += `bornBefore=${filter.bornBefore}`
             if (filter.diedAfter != null) params += `diedAfter=${filter.diedAfter}`
             if (filter.diedBefore != null) params += `diedBefore=${filter.diedBefore}`
+        }
+
+        if (sort != null && sort.field != null && sort.direction != null)  {
+            params += `sort=${sort.direction == SortDirection.Desc ? "-" : ""}${sort.field}`
         }
 
         const response = await fetch(ENDPOINTS.PERSONS + params, {

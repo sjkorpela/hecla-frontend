@@ -7,13 +7,15 @@ import {PersonsSort} from "@/types/personsSort";
 import {PersonsFilter} from "@/types/personsFilter";
 import AllPersonsTableFilter from "@/app/persons/allPersonsTableFilter";
 import useAllPersonsPaged from "@/hooks/useAllPersonsPaged";
+import {SortDirection} from "@/types/sortDirection";
+import AllPersonsTableSortToggle from "@/app/persons/allPersonsTableSortToggle";
 
 export default function AllPersonsTable() {
 
     const [sort, setSort] = useState<PersonsSort | undefined>();
     const [filter, setFilter] = useState<PersonsFilter | undefined>();
 
-    const { loading, page, status} = useAllPersonsPaged(undefined, undefined, undefined, sort, filter);
+    const { loading, page, status} = useAllPersonsPaged({sort: sort, filter: filter});
 
     return (
         <div>
@@ -25,8 +27,8 @@ export default function AllPersonsTable() {
             <table>
                 <thead>
                 <tr>
-                    <th>Nimi <a onClick={() => alert("nimi ylös")}>△</a> <a>▽</a></th>
-                    <th>Elinaika <a>△</a> <a>▽</a></th>
+                    <AllPersonsTableSortToggle sort={sort} setSort={setSort} name={"Nimi"} value={"name"} />
+                    <AllPersonsTableSortToggle sort={sort} setSort={setSort} name={"Elinaika"} value={"birthYear"} />
                     <th>Isä</th>
                     <th>Äiti</th>
                 </tr>

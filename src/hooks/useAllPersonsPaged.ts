@@ -4,19 +4,21 @@ import {PersonsFilter} from "@/types/personsFilter";
 import {PersonsSort} from "@/types/personsSort";
 import {Page} from "@/types/page";
 
+interface Props {
+    pageNumber?: number,
+    size?: number,
+    onLoad?: (page: Page) => void,
+    sort?: PersonsSort,
+    filter?: PersonsFilter
+}
+
 interface AllPersonsPagedState {
     loading: boolean
     page: Page | null
     status: number | null
 }
 
-export default function useAllPersonsPaged(
-    pageNumber?: number,
-    size?: number,
-    onLoad?: (page: Page) => void,
-    sort?: PersonsSort,
-    filter?: PersonsFilter
-): AllPersonsPagedState {
+export default function useAllPersonsPaged({pageNumber, size, onLoad, sort, filter}: Props): AllPersonsPagedState {
 
     const [state, setState] = useState<AllPersonsPagedState>({
         loading: true,
