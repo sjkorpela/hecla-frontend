@@ -4,6 +4,9 @@ import {Person} from "@/types/person";
 import {FirstName} from "@/types/firstName";
 import {LastName} from "@/types/lastName";
 import {PostPerson} from "@/types/postPerson";
+import {Page} from "@/types/page";
+import {PersonsFilter} from "@/types/personsFilter";
+import {PersonsSort} from "@/types/personsSort";
 
 interface PersonAndStatus {
     person: Person | null,
@@ -14,29 +17,47 @@ interface PersonArrayAndStatus {
     personArray: Person[] | null,
     status: number
 }
+
+interface PersonPageAndStatus {
+    page: Page,
+    status: number
+}
 export class PersonService {
-    public static async getAllPersons(): Promise<PersonArrayAndStatus> {
+    public static async getAllPersons(pageNumber?: number, size?: number, sort?: PersonsSort, filter?: PersonsFilter): Promise<PersonPageAndStatus> {
         await initKeycloak();
         if (keycloak.isTokenExpired()) {
             await keycloak.login();
         }
 
-        const response = await fetch(ENDPOINTS.PERSONS, {
+        // handle sort & filter
+
+        let params = "?";
+
+        if (filter != null) {
+            if (filter.deceased != null) params += `deceased=${filter.deceased}&`
+            if (filter.gender != null) params += `gender=${filter.gender}&`
+            if (filter.bornAfter != null) params += `bornAfter=${filter.bornAfter}`
+            if (filter.bornBefore != null) params += `bornBefore=${filter.bornBefore}`
+            if (filter.diedAfter != null) params += `diedAfter=${filter.diedAfter}`
+            if (filter.diedBefore != null) params += `diedBefore=${filter.diedBefore}`
+        }
+
+        const response = await fetch(ENDPOINTS.PERSONS + params, {
             headers: {
                 Authorization: `Bearer ${keycloak.token}`,
             },
         });
 
-        const personArray: Person[] = await response.json();
+        const page: Page = await response.json();
         const status: number = response.status;
 
-        personArray.forEach(person => {
+        page.content.forEach(person => {
             person.firstNames = person.firstNames ?? []
             person.lastNames = person.lastNames ?? []
             person.additionalInfos = person.additionalInfos ?? []
         })
 
-        return { personArray, status}
+        return { page, status}
     }
 
     public static async getPersonById(id: number): Promise<PersonAndStatus> {

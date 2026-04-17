@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {PersonService} from "@/services/personService";
 import {Person} from "@/types/person";
+import {PersonsFilter} from "@/types/personsFilter";
 
 interface AllPersonsState {
     loading: boolean
@@ -21,7 +22,8 @@ export default function useAllPersons(onLoad?: (personArray: Person[]) => void):
 
     useEffect(() => {
         (async () => {
-            const { personArray, status } = await PersonService.getAllPersons();
+            const { page , status } = await PersonService.getAllPersons();
+            const personArray = page.content;
 
             setState({
                 loading: false,
