@@ -35,10 +35,10 @@ export class PersonService {
         if (filter != null) {
             if (filter.deceased != null) params += `deceased=${filter.deceased}&`
             if (filter.gender != null) params += `gender=${filter.gender}&`
-            if (filter.bornAfter != null) params += `bornAfter=${filter.bornAfter}`
-            if (filter.bornBefore != null) params += `bornBefore=${filter.bornBefore}`
-            if (filter.diedAfter != null) params += `diedAfter=${filter.diedAfter}`
-            if (filter.diedBefore != null) params += `diedBefore=${filter.diedBefore}`
+            if (filter.bornAfter != null) params += `bornAfter=${filter.bornAfter}&`
+            if (filter.bornBefore != null) params += `bornBefore=${filter.bornBefore}&`
+            if (filter.diedAfter != null) params += `diedAfter=${filter.diedAfter}&`
+            if (filter.diedBefore != null) params += `diedBefore=${filter.diedBefore}&`
         }
 
         if (sort != null && sort.field != null && sort.direction != null)  {
@@ -54,7 +54,7 @@ export class PersonService {
         const page: Page = await response.json();
         const status: number = response.status;
 
-        page.content.forEach(person => {
+        page.content?.forEach(person => {
             person.firstNames = person.firstNames ?? []
             person.lastNames = person.lastNames ?? []
             person.additionalInfos = person.additionalInfos ?? []
