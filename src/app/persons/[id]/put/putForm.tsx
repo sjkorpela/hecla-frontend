@@ -169,7 +169,7 @@ export default function PutForm({ id }: Props) {
             <br/>
 
             <label>Sukupuoli</label><br/>
-            <FormGenderSelect setSelectedGender={setGender} testingId={"gender"} /><br/>
+            <FormGenderSelect gender={gender} setSelectedGender={setGender} testingId={"gender"} /><br/>
             <br/>
 
             <label>Syntymävuosi</label><br/>

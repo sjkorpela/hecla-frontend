@@ -123,7 +123,7 @@ export default function PostForm() {
             <br/>
 
             <label>Sukupuoli</label><br/>
-            <FormGenderSelect setSelectedGender={setGender} testingId={"gender"} /><br/>
+            <FormGenderSelect gender={gender} setSelectedGender={setGender} testingId={"gender"} /><br/>
             <br/>
 
             <label>Syntymävuosi</label><br/>
