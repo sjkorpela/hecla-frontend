@@ -6,7 +6,7 @@ import {Page} from "@/types/page";
 
 interface Props {
     pageNumber?: number,
-    size?: number,
+    pageSize?: number,
     onLoad?: (page: Page) => void,
     sort?: PersonsSort,
     filter?: PersonsFilter
@@ -18,7 +18,7 @@ interface AllPersonsPagedState {
     status: number | null
 }
 
-export default function useAllPersonsPaged({pageNumber, size, onLoad, sort, filter}: Props): AllPersonsPagedState {
+export default function useAllPersonsPaged({pageNumber, pageSize, onLoad, sort, filter}: Props): AllPersonsPagedState {
 
     const [state, setState] = useState<AllPersonsPagedState>({
         loading: true,
@@ -40,7 +40,7 @@ export default function useAllPersonsPaged({pageNumber, size, onLoad, sort, filt
                 status: null
             })
 
-            const { page , status } = await PersonService.getAllPersons(pageNumber, size, sort, filter);
+            const { page , status } = await PersonService.getAllPersons({pageNumber, pageSize, sort, filter});
 
             if (expired) return;
 
@@ -56,7 +56,7 @@ export default function useAllPersonsPaged({pageNumber, size, onLoad, sort, filt
         })()
 
         return () => { expired = true; };
-    }, [filter, sort]);
+    }, [filter, pageNumber, pageSize, sort]);
 
     return state;
 }

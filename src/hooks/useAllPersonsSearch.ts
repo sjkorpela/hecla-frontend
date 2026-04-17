@@ -2,6 +2,12 @@ import {useEffect, useRef, useState} from "react";
 import {PersonService} from "@/services/personService";
 import {Person} from "@/types/person";
 import {PersonsFilter} from "@/types/personsFilter";
+import * as sea from "node:sea";
+
+interface Props {
+    searchQuery: string,
+    onLoad?: (personArray: Person[]) => void
+}
 
 interface AllPersonsState {
     loading: boolean
@@ -9,7 +15,7 @@ interface AllPersonsState {
     status: number | null
 }
 
-export default function useAllPersons(onLoad?: (personArray: Person[]) => void): AllPersonsState {
+export default function useAllPersonsSearch({searchQuery, onLoad}: Props): AllPersonsState {
 
     const [state, setState] = useState<AllPersonsState>({
         loading: true,
@@ -21,8 +27,20 @@ export default function useAllPersons(onLoad?: (personArray: Person[]) => void):
     useEffect(() => { onLoadRef.current = onLoad; });
 
     useEffect(() => {
+        // Race condition
+        let expired = false;
+
         (async () => {
-            const { page , status } = await PersonService.getAllPersons({});
+            setState({
+                loading: true,
+                personArray: null,
+                status: null
+            })
+
+            const { page , status } = await PersonService.getAllPersons({searchQuery: searchQuery});
+
+            if (expired) return;
+
             const personArray = page.content;
 
             setState({
@@ -35,7 +53,9 @@ export default function useAllPersons(onLoad?: (personArray: Person[]) => void):
                 onLoadRef.current(personArray);
             }
         })()
-    }, []);
+
+        return () => { expired = true; };
+    }, [searchQuery]);
 
     return state;
 }

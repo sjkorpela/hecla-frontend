@@ -23,14 +23,25 @@ interface PersonPageAndStatus {
     page: Page,
     status: number
 }
+
+interface GetAllPersonsProps {
+    pageNumber?: number,
+    pageSize?: number,
+    sort?: PersonsSort,
+    filter?: PersonsFilter,
+    searchQuery?: string
+}
 export class PersonService {
-    public static async getAllPersons(pageNumber?: number, size?: number, sort?: PersonsSort, filter?: PersonsFilter): Promise<PersonPageAndStatus> {
+    public static async getAllPersons({pageNumber, pageSize, sort, filter, searchQuery}: GetAllPersonsProps): Promise<PersonPageAndStatus> {
         await initKeycloak();
         if (keycloak.isTokenExpired()) {
             await keycloak.login();
         }
 
         let params = "?";
+
+        if (pageNumber != null) params += `page=${pageNumber}`
+        if (pageSize != null) params += `size=${pageSize}`
 
         if (filter != null) {
             if (filter.deceased != null) params += `deceased=${filter.deceased}&`
@@ -44,6 +55,8 @@ export class PersonService {
         if (sort != null && sort.field != null && sort.direction != null)  {
             params += `sort=${sort.field}${sort.direction == SortDirection.Desc ? ",desc" : ",asc"}`
         }
+
+        if (searchQuery != null) params += `search=${searchQuery}&`
 
         const response = await fetch(ENDPOINTS.PERSONS + params, {
             headers: {

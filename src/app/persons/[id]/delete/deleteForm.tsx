@@ -47,7 +47,7 @@ export default function DeleteForm({ id }: Props) {
         const status = await PersonService.deletePerson(id);
 
         if (status == 204) {
-            router.push("/persons")
+            redirect("/persons")
         } else {
             alert("Jokin meni vikaan?")
         }

@@ -1,6 +1,7 @@
 import styles from "@/app/page.module.css";
 import AllPersonsTable from "@/app/persons/allPersonsTable";
 import Link from "next/dist/client/link";
+import PersonsSearch from "@/app/persons/personsSearch";
 
 export default function PersonsPage() {
     return (
@@ -8,6 +9,10 @@ export default function PersonsPage() {
             <main className={styles.main}>
                 <div className={styles.intro}>
                     <h1>HE/CLA</h1>
+
+                    <h2>HAKU</h2>
+                    <PersonsSearch />
+
                     <h2>SUKULAISET</h2>
                     <AllPersonsTable />
 
