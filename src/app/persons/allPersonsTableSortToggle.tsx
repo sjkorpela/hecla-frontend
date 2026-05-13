@@ -15,16 +15,16 @@ export default function AllPersonsTableSortToggle({sort, setSort, name, value}: 
             return (
                 <th>
                     {name}
-                    <a onClick={() => {setSort(undefined)}}>▲</a>
-                    <a onClick={() => {setSort({field: value, direction: SortDirection.Desc})}}>▽</a>
+                    <button onClick={() => {setSort(undefined)}}><span className="up">▲</span></button>
+                    <button onClick={() => {setSort({field: value, direction: SortDirection.Desc})}}><span>▽</span></button>
                 </th>
             )
         } else {
             return (
                 <th>
                     {name}
-                    <a onClick={() => {setSort({field: value, direction: SortDirection.Asc})}}>△</a>
-                    <a onClick={() => {setSort(undefined)}}>▼</a>
+                    <button onClick={() => {setSort({field: value, direction: SortDirection.Asc})}}><span className="up">△</span></button>
+                    <button onClick={() => {setSort(undefined)}}><span>▼</span></button>
                 </th>
             )
         }
@@ -32,8 +32,8 @@ export default function AllPersonsTableSortToggle({sort, setSort, name, value}: 
         return (
             <th>
                 {name}
-                <a onClick={() => {setSort({field: value, direction: SortDirection.Asc})}}>△</a>
-                <a onClick={() => {setSort({field: value, direction: SortDirection.Desc})}}>▽</a>
+                <button onClick={() => {setSort({field: value, direction: SortDirection.Asc})}}><span className="up">△</span></button>
+                <button onClick={() => {setSort({field: value, direction: SortDirection.Desc})}}><span>▽</span></button>
             </th>
         )
     }
