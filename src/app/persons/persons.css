@@ -1,6 +1,7 @@
 .main-divider {
     display: flex;
     flex: 1;
+    gap: 2vh;
 }
 
 aside {
@@ -8,9 +9,13 @@ aside {
     /*border-style: solid;*/
     /*border-color: blue;*/
 
+    padding-left: 3vh;
     display: flex;
     flex-direction: column;
     gap: 2vh;
+
+    font-size: 1.2em;
+
 
     /*div {*/
     /*    border-width: 0.5vh;*/
@@ -21,6 +26,88 @@ aside {
 
 h2, h3, h4 {
     padding-bottom: 1vh;
+}
+
+* {
+    background: white;
+    input, select, button {
+        all: unset;
+        padding: 0 5px 0 5px;
+
+        border-style: solid;
+        border-width: 0.2vh;
+        border-color: black;
+        border-radius: 7px;
+
+        height: 1.8em;
+        font-size: 0.8em;
+    }
+
+    select:hover, button:hover {
+        background: lightgray;
+    }
+}
+
+.persons-search {
+    z-index: 99;
+    max-height: 30px;
+    margin-bottom: 20px;
+    overflow: visible;
+    background: white;
+
+
+
+    .persons-search-wrapper {
+        position: relative;
+        z-index: 99;
+        border-style: solid;
+        border-width: 0.2vh;
+        border-radius: 20px;
+        background: white;
+    }
+
+    input {
+        height: 30px;
+        width: 100%;
+        padding: 10px 10px 10px 10px;
+        border-style: none;
+        border-radius: 200px;
+        font-size: 1em;
+    }
+
+    .persons-search-results {
+        position: relative;
+        top: 100%;
+        background: transparent;
+
+        .persons-search-result-item {
+            background: transparent;
+            padding: 1vh;
+        }
+    }
+}
+
+.filters-title {
+    display: flex;
+    justify-content: space-between;
+
+    /*button {*/
+    /*    max-height: 1.8em;*/
+    /*    font-size: 0.8em;*/
+    /*}*/
+}
+
+.filters {
+    td:first-child {
+        padding-right: 15px;
+    }
+    input, select {
+        /*border-width: 0.5vh;*/
+        /*border-style: solid;*/
+        /*border-color: aqua;*/
+        /*font-size: 0.8em;*/
+        width: 120px;
+    }
 }
 
 .all-persons {

@@ -10,8 +10,8 @@ export default function PersonsSearchItem({person}: Props) {
     const personName = PersonService.getPersonsFirstAndLastName(person)
 
     return (
-        <tr>
-            <td><Link href={`/persons/${person.id}`}><u>{personName}</u></Link></td>
-        </tr>
+        <div className="persons-search-result-item">
+            <Link href={`/persons/${person.id}`}><u>{personName}</u></Link>
+        </div>
     )
 }

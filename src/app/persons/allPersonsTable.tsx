@@ -1,13 +1,11 @@
 "use client";
 
 import AllPersonsTableItem from "@/app/persons/allPersonsTableItem";
-import useAllPersons from "@/hooks/useAllPersons";
 import {useState} from "react";
 import {PersonsSort} from "@/types/personsSort";
 import {PersonsFilter} from "@/types/personsFilter";
 import AllPersonsTableFilter from "@/app/persons/allPersonsTableFilter";
 import useAllPersonsPaged from "@/hooks/useAllPersonsPaged";
-import {SortDirection} from "@/types/sortDirection";
 import AllPersonsTableSortToggle from "@/app/persons/allPersonsTableSortToggle";
 import PersonsSearch from "@/app/persons/personsSearch";
 import Link from "next/dist/client/link";
@@ -17,19 +15,18 @@ export default function AllPersonsTable() {
     const [sort, setSort] = useState<PersonsSort | undefined>();
     const [filter, setFilter] = useState<PersonsFilter | undefined>();
 
-    const { loading, page, status} = useAllPersonsPaged({sort: sort, filter: filter});
+    const { loading, page} = useAllPersonsPaged({sort: sort, filter: filter});
 
     return (
         <div className="main-divider">
             <aside>
 
                 <div>
-                    <h3>HAKU</h3>
+                    {/*<h3>HAKU</h3>*/}
                     <PersonsSearch />
                 </div>
 
                 <div>
-                    <h3>SUODATUS</h3>
                     <AllPersonsTableFilter filter={filter} setFilter={setFilter}/>
                 </div>
 

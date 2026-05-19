@@ -57,7 +57,12 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
 
     return (
         <form ref={filterForm}>
-            <table>
+            <div className="filters-title">
+                <h3>SUODATUS</h3>
+                <button type="button" onClick={resetFilters}>Alusta suodattimet</button>
+            </div>
+
+            <table className="filters">
                 <tbody>
                     <tr>
                         <td>Elossa:</td>
@@ -112,13 +117,6 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
                         <td>Kuollut ennen:</td>
                         <td>
                             <FormYearInput year={diedBefore} setYear={setDiedBefore} testingId={"diedBefore"} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><br/>
-                            <button type="button" onClick={resetFilters}>
-                                Alusta suodattimet
-                            </button>
                         </td>
                     </tr>
                 </tbody>
