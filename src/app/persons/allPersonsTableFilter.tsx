@@ -67,7 +67,7 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
                     <tr>
                         <td>Elossa:</td>
                         <td>
-                            <select
+                            <div className="select-wrapper"><select
                                 onChange={(e) => setDeceased(
                                     parseDeceased(e.target.value)
                                 )}
@@ -76,13 +76,13 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
                                 <option value={"null"}>Valitse</option>
                                 <option value={"true"}>Elossa</option>
                                 <option value={"false"}>Kuollut</option>
-                            </select>
+                            </select></div>
                         </td>
                     </tr>
                     <tr>
                         <td>Sukupuoli:</td>
                         <td>
-                            <select
+                            <div className="select-wrapper"><select
                                 onChange={(e) => setGender(
                                     e.target.value == "null" ? null : e.target.value as Gender
                                 )}
@@ -92,7 +92,7 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
                                 <option value={Gender.Male.valueOf()}>Mies</option>
                                 <option value={Gender.Female.valueOf()}>Nainen</option>
                                 {/*<option value={"unknown"}>Ei merkitty</option>*/}
-                            </select>
+                            </select></div>
                         </td>
                     </tr>
                     <tr>

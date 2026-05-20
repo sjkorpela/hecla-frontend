@@ -13,7 +13,7 @@ export default function FormNameSelect({ names, setSelectedName, testingId }: Pr
     }
 
     return (
-        <select onChange={(e) => selectChange(e)} name={testingId}>
+        <div className="select-wrapper"><select onChange={(e) => selectChange(e)} name={testingId}>
             <option value={-1}>Valitse</option>
             {
                 names.map((fn, key) => {
@@ -22,6 +22,6 @@ export default function FormNameSelect({ names, setSelectedName, testingId }: Pr
                     )
                 })
             }
-        </select>
+        </select></div>
     )
 }

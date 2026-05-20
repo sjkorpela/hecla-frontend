@@ -9,6 +9,7 @@ import useAllPersonsPaged from "@/hooks/useAllPersonsPaged";
 import AllPersonsTableSortToggle from "@/app/persons/allPersonsTableSortToggle";
 import PersonsSearch from "@/app/persons/personsSearch";
 import Link from "next/dist/client/link";
+import {redirect} from "next/navigation";
 
 export default function AllPersonsTable() {
 
@@ -32,7 +33,7 @@ export default function AllPersonsTable() {
 
                 <div>
                     <h3>LISÄVAIHTOEHDOT</h3>
-                    <Link href={"/persons/post"}><u>Lisää sukulainen</u></Link>
+                    <button onClick={() => redirect("/persons/post")}>Lisää sukulainen</button>
                 </div>
 
             </aside>

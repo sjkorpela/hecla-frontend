@@ -25,13 +25,13 @@ export default function FormYearInput({ year, setYear, placeholder, testingId }:
     }
 
     return (
-        <input
+        <div className="input-number-wrapper"><input
             type={"number"}
             placeholder={placeholder ?? "####"}
             defaultValue={year ?? ""}
             onKeyDown={inputKeyDown}
             onChange={inputChange}
             name={testingId}
-        />
+        /></div>
     )
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
 /*:root {*/
 /*  --background: #ffffff;*/
 /*  --foreground: #171717;*/
@@ -75,5 +77,82 @@ header {
 
     h1 {
         padding: 2vh;
+    }
+}
+
+
+
+
+
+
+h2, h3, h4 {
+    padding-bottom: 1vh;
+}
+
+* {
+    input, button {
+        all: unset;
+        padding: 0 5px 0 5px;
+
+        border-style: solid;
+        border-width: 0.2vh;
+        border-color: black;
+        border-radius: 7px;
+
+        height: 1.8em;
+        font-size: 0.8em;
+    }
+
+    select:hover, button:hover {
+        background: lightgray;
+    }
+
+    select {
+        all: unset;
+        flex: 1;
+        background: transparent;
+        padding: 0 5px 0 5px;
+        border-radius: 9999px;
+    }
+
+    .select-wrapper {
+        position: relative;
+
+        border-style: solid;
+        border-width: 0.2vh;
+        border-color: black;
+        border-radius: 7px;
+
+        height: 1.8em;
+        font-size: 0.8em;
+
+        display: flex;
+    }
+
+    .select-wrapper::after {
+        font-family: "Material Symbols Outlined";
+        content: "keyboard_arrow_down";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 25px;
+        height: 100%;
+        background: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        font-size: 1.5em;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield; /* Firefox */
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 }

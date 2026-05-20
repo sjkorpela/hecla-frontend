@@ -27,7 +27,7 @@ export default function PersonsSearch() {
                 <div className="persons-search-results">
                     {
                         searchQuery.length < 1 ? <></> :
-                            loading ? <div className="persons-search-result-item">Lataa... </div> :
+                            loading ? <></> :
                                 <>{
                                     personArray != null && personArray.length == 0 ? <div className="persons-search-result-item">Ei tuloksia...</div> :
                                         personArray?.map((person) => {

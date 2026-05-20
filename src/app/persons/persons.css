@@ -24,29 +24,7 @@ aside {
     /*}*/
 }
 
-h2, h3, h4 {
-    padding-bottom: 1vh;
-}
 
-* {
-    background: white;
-    input, select, button {
-        all: unset;
-        padding: 0 5px 0 5px;
-
-        border-style: solid;
-        border-width: 0.2vh;
-        border-color: black;
-        border-radius: 7px;
-
-        height: 1.8em;
-        font-size: 0.8em;
-    }
-
-    select:hover, button:hover {
-        background: lightgray;
-    }
-}
 
 .persons-search {
     z-index: 99;
@@ -117,9 +95,9 @@ h2, h3, h4 {
 
     flex: 1;
 
-
-
     table {
+        width: 100%;
+
         thead {
             tr {
                 th {
