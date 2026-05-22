@@ -1,3 +1,4 @@
+
 .main-divider {
     display: flex;
     flex: 1;
@@ -5,26 +6,12 @@
 }
 
 aside {
-    /*border-width: 0.5vh;*/
-    /*border-style: solid;*/
-    /*border-color: blue;*/
-
     padding-left: 3vh;
     display: flex;
     flex-direction: column;
     gap: 2vh;
-
     font-size: 1.2em;
-
-
-    /*div {*/
-    /*    border-width: 0.5vh;*/
-    /*    border-style: solid;*/
-    /*    border-color: aqua;*/
-    /*}*/
 }
-
-
 
 .persons-search {
     z-index: 99;
@@ -47,7 +34,6 @@ aside {
         width: 90%;
         padding: 10px 10px 10px 10px;
         border-style: none;
-        /*border-radius: 200px;*/
         font-size: 1em;
     }
 
@@ -59,6 +45,20 @@ aside {
         .persons-search-result-item {
             background: transparent;
             padding: 1vh;
+            border-style: solid;
+            border-width: 0.2vh 0 0 0;
+            border-color: darkgray;
+            margin: 0 1vh 0 1vh;
+            cursor: pointer;
+        }
+
+        .persons-search-result-item:last-of-type {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .persons-search-result-item:hover {
+            background: lightgray;
         }
     }
 }
@@ -67,80 +67,89 @@ aside {
     display: flex;
     justify-content: space-between;
 
-    /*button {*/
-    /*    max-height: 1.8em;*/
-    /*    font-size: 0.8em;*/
-    /*}*/
+    button {
+        width: 145px;
+        text-align: center;
+        margin-right: 3px;
+    }
 }
 
 .filters {
     min-width: max-content;
+
     td:first-child {
         padding-right: 15px;
     }
+
     input, select {
-        /*border-width: 0.5vh;*/
-        /*border-style: solid;*/
-        /*border-color: aqua;*/
-        /*font-size: 0.8em;*/
         width: 120px;
     }
 }
 
 .all-persons {
-    /*border-width: 0.5vh;*/
-    /*border-style: solid;*/
-    /*border-color: green;*/
+    flex: 1;
 
-    .all-persons-sort:hover {
-        cursor: pointer;
+    .all-persons-sort-field {
+        border: 2px solid transparent;
+        font-size: 1em;
+        padding: 0;
+        margin: 0;
+        height: 100%;
     }
 
-    span.all-persons-sort-arrow {
+    .all-persons-sort-arrow {
+        border: 2px solid transparent;
         margin-left: 0.4em;
         cursor: pointer;
         user-select: none;
         font-size: 1.1em;
         position: relative;
         bottom: 1px;
+        padding: 0;
+        height: 100%;
     }
 
-    flex: 1;
+    .all-persons-sort-field:hover, .all-persons-sort-arrow:hover {
+        background: transparent;
+        cursor: pointer;
+        color: dimgray;
+    }
+
+    .all-persons-sort-field:focus-visible, .all-persons-sort-arrow:focus-visible {
+        background: transparent;
+        cursor: pointer;
+        border-style: solid;
+        border-width: 2px;
+        border-color: Highlight;
+        border-radius: 2px;
+    }
 
     table {
         width: 100%;
+        border-collapse: collapse;
 
-        thead {
-            tr {
-                th {
-                    text-align: left;
-                    font-size: 1.2em;
-                }
+        th {
+            text-align: left;
+            font-size: 1.2em;
+        }
+
+        td {
+            min-width: 20vh;
+            padding: 0.6vh 0 0.6vh 0;
+            border-style: solid;
+            border-width: 0 0 0.2vh 0;
+            border-color: darkgray;
+            border-radius: 200px;
+            font-size: 1.2em;
+
+            .not-available {
+                font-size: 0.8em;
+                color: dimgray;
             }
         }
 
-        border-collapse: collapse;
-
-        tbody {
-            tr {
-                td {
-                    min-width: 20vh;
-
-                    padding: 0.6vh 0 0.6vh 0;
-
-                    border-style: solid;
-                    border-width: 0 0 0.2vh 0;
-                    border-color: darkgray;
-                    border-radius: 200px;
-
-                    font-size: 1.2em;
-
-                    .not-available {
-                        font-size: 0.8em;
-                        color: dimgray;
-                    }
-                }
-            }
+        td:last-of-type {
+            width: 50%;
         }
     }
 }

@@ -1,10 +1,6 @@
 import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
-import {PersonsSort} from "@/types/personsSort";
 import {PersonsFilter} from "@/types/personsFilter";
 import {Gender} from "@/types/gender";
-import FormCheckbox from "@/components/form/formCheckbox";
-import AllPersonsTableFilterOption from "@/app/persons/allPersonsTableFilterOption";
-import FormGenderSelect from "@/components/form/formGenderSelect";
 import FormYearInput from "@/components/form/formYearInput";
 
 interface Props {

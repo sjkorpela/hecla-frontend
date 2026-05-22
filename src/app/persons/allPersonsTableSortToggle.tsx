@@ -12,7 +12,7 @@ interface Props {
 export default function AllPersonsTableSortToggle({sort, setSort, name, value}: Props) {
 
 
-    function fieldName() { return <span className="all-persons-sort" onClick={() => {nextSort()}}>{name}</span>; }
+    function fieldName() { return <button className="all-persons-sort-field" onClick={() => {nextSort()}}>{name}</button>; }
 
     function nextSort() {
         if (sort == undefined || sort.field != value) setSort({field: value, direction: SortDirection.Asc});
@@ -25,9 +25,9 @@ export default function AllPersonsTableSortToggle({sort, setSort, name, value}: 
         const arrow = sort != undefined && sort.field == value && sort.direction == direction ? toggledOn : toggledOff;
 
         return (
-            <span onClick={() => toggleSortDirection(direction)} className="all-persons-sort-arrow">
+            <button onClick={() => toggleSortDirection(direction)} className="all-persons-sort-arrow">
                 {arrow}
-            </span>
+            </button>
         )
     }
 
@@ -36,7 +36,7 @@ export default function AllPersonsTableSortToggle({sort, setSort, name, value}: 
         else setSort({field: value, direction: direction});
     }
 
-    
+
 
     return (
         <th>

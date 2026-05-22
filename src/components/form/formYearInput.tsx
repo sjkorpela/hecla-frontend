@@ -24,6 +24,11 @@ export default function FormYearInput({ year, setYear, placeholder, testingId }:
         setYear(value);
     }
 
+    function resetInput() {
+        (document.getElementById(testingId) as HTMLInputElement).value = "";
+        setYear(null);
+    }
+
     return (
         <div className="input-number-wrapper"><input
             type={"number"}
@@ -31,7 +36,13 @@ export default function FormYearInput({ year, setYear, placeholder, testingId }:
             defaultValue={year ?? ""}
             onKeyDown={inputKeyDown}
             onChange={inputChange}
+            id={testingId}
             name={testingId}
-        /></div>
+        />
+            <div
+                className={`input-number-reset ${year == null ? "disabled" : ""}`}
+                onClick={resetInput}>
+            </div>
+        </div>
     )
 }
