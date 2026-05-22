@@ -10,31 +10,39 @@ interface Props {
 }
 
 export default function AllPersonsTableSortToggle({sort, setSort, name, value}: Props) {
-    if (sort?.field == value) {
-        if (sort.direction == SortDirection.Asc) {
-            return (
-                <th>
-                    {name}
-                    <button onClick={() => {setSort(undefined)}}><span className="up">▲</span></button>
-                    <button onClick={() => {setSort({field: value, direction: SortDirection.Desc})}}><span>▽</span></button>
-                </th>
-            )
-        } else {
-            return (
-                <th>
-                    {name}
-                    <button onClick={() => {setSort({field: value, direction: SortDirection.Asc})}}><span className="up">△</span></button>
-                    <button onClick={() => {setSort(undefined)}}><span>▼</span></button>
-                </th>
-            )
-        }
-    } else {
+
+
+    function fieldName() { return <span className="all-persons-sort" onClick={() => {nextSort()}}>{name}</span>; }
+
+    function nextSort() {
+        if (sort == undefined || sort.field != value) setSort({field: value, direction: SortDirection.Asc});
+        else if (sort.direction == SortDirection.Asc) setSort({field: value, direction: SortDirection.Desc});
+        else setSort(undefined);
+    }
+
+    function sortButton(direction: SortDirection, toggledOn: string, toggledOff: string) {
+
+        const arrow = sort != undefined && sort.field == value && sort.direction == direction ? toggledOn : toggledOff;
+
         return (
-            <th>
-                {name}
-                <button onClick={() => {setSort({field: value, direction: SortDirection.Asc})}}><span className="up">△</span></button>
-                <button onClick={() => {setSort({field: value, direction: SortDirection.Desc})}}><span>▽</span></button>
-            </th>
+            <span onClick={() => toggleSortDirection(direction)} className="all-persons-sort-arrow">
+                {arrow}
+            </span>
         )
     }
+
+    function toggleSortDirection(direction: SortDirection) {
+        if (sort != undefined && sort.field == value && sort.direction == direction) setSort(undefined);
+        else setSort({field: value, direction: direction});
+    }
+
+    
+
+    return (
+        <th>
+            {fieldName()}
+            {sortButton(SortDirection.Asc, "▲", "△")}
+            {sortButton(SortDirection.Desc, "▼", "▽")}
+        </th>
+    )
 }

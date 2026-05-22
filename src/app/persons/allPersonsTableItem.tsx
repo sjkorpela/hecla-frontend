@@ -18,18 +18,21 @@ export default function AllPersonsTableItem({ person, father, mother }: Props) {
 
     const personName = PersonService.getPersonsFirstAndLastName(person)
 
-    const birthYear = person.birthYear ?? "N/A"
-    const deathYear = person.deathYear ?? ""
+    const birthYear = person.birthYear ?? null
+    const deathYear = person.deathYear ?? null
 
     const fatherName = PersonService.getPersonsFirstAndLastName(father);
     const motherName = PersonService.getPersonsFirstAndLastName(mother);
 
+    function notAvailable() { return <span className="not-available">N/A</span>; }
+    function noYears() {return <span className="not-available">-</span>; }
+
     return (
-        <tr /* onClick={() => redirect(`/persons/${person.id}`)} */>
+        <tr>
             <td><Link href={`/persons/${person.id}`}><u>{personName}</u></Link></td>
-            <td>{birthYear}-{deathYear}</td>
-            <td>{father != null ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</td>
-            <td>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</td>
+            <td>{birthYear == null && deathYear == null ? noYears() : `${birthYear ?? ""}-${deathYear ?? ""}`}   </td>
+            <td>{father != null ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : notAvailable()}</td>
+            <td>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : notAvailable()}</td>
         </tr>
     )
 }

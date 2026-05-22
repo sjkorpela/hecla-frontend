@@ -63,6 +63,7 @@ main {
 
     display: flex;
     flex-direction: column;
+    text-wrap: nowrap;
 }
 
 header {
@@ -76,14 +77,10 @@ header {
     align-items: center;
 
     h1 {
-        padding: 2vh;
+        padding: 2vh 2vh 2vh 11vh;
+        font-size: 2.5em;
     }
 }
-
-
-
-
-
 
 h2, h3, h4 {
     padding-bottom: 1vh;
@@ -144,6 +141,8 @@ h2, h3, h4 {
         justify-content: center;
         pointer-events: none;
         font-size: 1.5em;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
     }
 
     input[type="number"] {
