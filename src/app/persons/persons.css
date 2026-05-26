@@ -81,8 +81,13 @@ aside {
         padding-right: 15px;
     }
 
-    input, select {
+    input, select{
         width: 120px;
+    }
+
+    button {
+        text-align: center;
+        width: 145px;
     }
 }
 
@@ -133,7 +138,7 @@ aside {
             font-size: 1.2em;
         }
 
-        tr:hover {
+        tr.tr-clickable:hover {
             background: lightgray;
             cursor: pointer;
         }

@@ -52,12 +52,13 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
 
     return (
         <form ref={filterForm}>
-            <div className="filters-title">
-                <h3>SUODATUS</h3>
-                <button type="button" onClick={resetFilters}>Alusta suodattimet</button>
-            </div>
-
             <table className="filters">
+                <thead>
+                    <tr>
+                        <td><h3>SUODATUS</h3></td>
+                        <td><button type="button" onClick={resetFilters}>Tyhjennä kentät</button></td>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
                         <td>Elossa:</td>

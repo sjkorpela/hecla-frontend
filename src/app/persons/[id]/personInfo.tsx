@@ -87,11 +87,12 @@ export default function PersonInfo({ id }: Props) {
             {/*    <li>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>*/}
             {/*</ul>*/}
             {/*<br />*/}
-            {/*<h2>LISÄVAIHTOEHDOT</h2>*/}
+            <h2>LISÄVAIHTOEHDOT</h2>
             {/*<ul>*/}
             {/*    <li><Link href={`/persons/${id}/put`}><u>Muokkaa sukulaista</u></Link></li>*/}
-            {/*    <li><Link href={`/persons/${id}/delete`}><u>Poista sukulainen</u></Link></li>*/}
+            {/*    <li><Link href={`/persons/${id}/(.)delete`}><u>Poista sukulainen</u></Link></li>*/}
             {/*</ul>*/}
+            <button onClick={() => router.push(`/persons/${id}/delete`)}>Poista</button>
         </div>
     )
 }

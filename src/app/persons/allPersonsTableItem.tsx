@@ -30,7 +30,7 @@ export default function AllPersonsTableItem({ person, father, mother }: Props) {
     function routeToPerson() { router.push(`/persons/${person.id}`); }
 
     return (
-        <tr tabIndex={0} onClick={routeToPerson}>
+        <tr tabIndex={0} onClick={routeToPerson} className="tr-clickable">
             <td>{personName}</td>
             <td>{birthYear == null && deathYear == null ? noYears() : `${birthYear ?? ""}-${deathYear ?? ""}`}   </td>
             <td>{father != null ? fatherName : notAvailable()}</td>
