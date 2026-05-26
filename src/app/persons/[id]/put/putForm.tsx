@@ -16,7 +16,7 @@ import FormGenderSelect from "@/components/form/formGenderSelect";
 import FormYearInput from "@/components/form/formYearInput";
 import FormTextInput from "@/components/form/formTextInput";
 import FormCheckbox from "@/components/form/formCheckbox";
-import {redirect} from "next/navigation";
+import {useRouter} from "next/navigation";
 import usePerson from "@/hooks/usePerson";
 import FormAdditionalInfoPool from "@/components/form/formAdditionalInfoPool";
 
@@ -25,6 +25,7 @@ interface Props {
 }
 
 export default function PutForm({ id }: Props) {
+    const router = useRouter();
 
     const { loading: personLoading, person, status: personStatus } = usePerson(id, getValuesFromPerson)
     const { loading: personArrayLoading, personArray, status: personArrayStatus } = useAllPersons()
@@ -51,7 +52,7 @@ export default function PutForm({ id }: Props) {
     const [additionalInfos, setAdditionalInfos] = useState<AdditionalInfo[]>([])
 
     if (personStatus == 404) {
-        redirect("/persons")
+        router.push("/persons")
     }
 
     function getValuesFromPerson(person: Person) {
@@ -138,7 +139,7 @@ export default function PutForm({ id }: Props) {
         const status = await PersonService.putPerson(id, person);
 
         if (status == 200) {
-            redirect(`/persons/${id}`)
+            router.push(`/persons/${id}`)
         }
     }
 

@@ -2,7 +2,7 @@ import {Person} from "@/types/person";
 import {PersonService} from "@/services/personService";
 import Link from "next/dist/client/link";
 import {useEffect, useState} from "react";
-import {redirect} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 interface Props {
     person: Person,
@@ -11,6 +11,7 @@ interface Props {
 }
 
 export default function AllPersonsTableItem({ person, father, mother }: Props) {
+    const router = useRouter();
 
     if (person == null) {
         return null;
@@ -26,13 +27,14 @@ export default function AllPersonsTableItem({ person, father, mother }: Props) {
 
     function notAvailable() { return <span className="not-available">N/A</span>; }
     function noYears() {return <span className="not-available">-</span>; }
+    function routeToPerson() { router.push(`/persons/${person.id}`); }
 
     return (
-        <tr>
-            <td><Link href={`/persons/${person.id}`}><u>{personName}</u></Link></td>
+        <tr tabIndex={0} onClick={routeToPerson}>
+            <td>{personName}</td>
             <td>{birthYear == null && deathYear == null ? noYears() : `${birthYear ?? ""}-${deathYear ?? ""}`}   </td>
-            <td>{father != null ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : notAvailable()}</td>
-            <td>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : notAvailable()}</td>
+            <td>{father != null ? fatherName : notAvailable()}</td>
+            <td>{mother != null ? motherName : notAvailable()}</td>
         </tr>
     )
 }

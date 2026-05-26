@@ -8,10 +8,10 @@ import AllPersonsTableFilter from "@/app/persons/allPersonsTableFilter";
 import useAllPersonsPaged from "@/hooks/useAllPersonsPaged";
 import AllPersonsTableSortToggle from "@/app/persons/allPersonsTableSortToggle";
 import PersonsSearch from "@/app/persons/personsSearch";
-import Link from "next/dist/client/link";
-import {redirect} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 export default function AllPersonsTable() {
+    const router = useRouter();
 
     const [sort, setSort] = useState<PersonsSort | undefined>();
     const [filter, setFilter] = useState<PersonsFilter | undefined>();
@@ -33,7 +33,7 @@ export default function AllPersonsTable() {
 
                 <div>
                     <h3>LISÄVAIHTOEHDOT</h3>
-                    <button onClick={() => redirect("/persons/post")}>Lisää sukulainen</button>
+                    <button onClick={() => router.push("/persons/post")}>Lisää sukulainen</button>
                 </div>
 
             </aside>

@@ -17,7 +17,7 @@ import FormGenderSelect from "@/components/form/formGenderSelect";
 import FormYearInput from "@/components/form/formYearInput";
 import FormTextInput from "@/components/form/formTextInput";
 import FormCheckbox from "@/components/form/formCheckbox";
-import {redirect} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 export default function PostForm() {
 
@@ -92,7 +92,7 @@ export default function PostForm() {
         const result = await PersonService.postPerson(person);
 
         if (result.status == 201 && result.person != null) {
-            redirect(`/persons/${result.person.id}`)
+            router.push(`/persons/${result.person.id}`)
         }
     }
 

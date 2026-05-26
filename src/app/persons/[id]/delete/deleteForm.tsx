@@ -1,29 +1,20 @@
 "use client"
 
-import {useEffect, useState} from "react";
-import FormNamePool from "@/components/form/formNamePool";
-import {AdditionalInfo} from "@/types/additionalInfo";
-import {Person} from "@/types/person";
 import {PersonService} from "@/services/personService";
-import {PostPerson} from "@/types/postPerson";
-import {FirstName} from "@/types/firstName";
-import {LastName} from "@/types/lastName";
-import FormAdditionalInfoPool from "@/components/form/formAdditionalInfoPool";
-import {redirect, useRouter} from "next/navigation";
-import {router} from "next/dist/client";
-import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 import usePerson from "@/hooks/usePerson";
+import {useRouter} from "next/navigation";
 
 interface Props {
     id: number
 }
 
 export default function DeleteForm({ id }: Props) {
+    const router = useRouter();
 
     const { loading, person, status } = usePerson(id)
 
     if (status == 404) {
-        redirect("/persons")
+        router.push("/persons")
     }
 
     if (id == null || person == null) {
@@ -47,7 +38,7 @@ export default function DeleteForm({ id }: Props) {
         const status = await PersonService.deletePerson(id);
 
         if (status == 204) {
-            redirect("/persons")
+            router.push("/persons")
         } else {
             alert("Jokin meni vikaan?")
         }

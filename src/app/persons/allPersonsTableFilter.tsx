@@ -21,7 +21,6 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
     const [diedBefore, setDiedBefore] = useState<number | null>(filter?.diedBefore ?? null)
 
     useEffect(() => {
-        console.log(bornAfter)
         setFilter({
             deceased: deceased,
             gender: gender,

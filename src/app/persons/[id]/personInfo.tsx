@@ -1,25 +1,24 @@
 "use client";
 
-import {Person} from "@/types/person";
 import {PersonService} from "@/services/personService";
-import {useEffect, useState} from "react";
 import AdditionalInfoItem from "@/app/persons/[id]/additionalInfoItem";
 import Link from "next/dist/client/link";
 import usePerson from "@/hooks/usePerson";
-import {redirect} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 interface Props {
     id: number
 }
 
 export default function PersonInfo({ id }: Props) {
+    const router = useRouter();
 
     const { loading, person, status } = usePerson(id)
     const { loading: fatherLoading, person: father, status: fatherStatus } = usePerson(person?.fatherId)
     const { loading: motherLoading, person: mother, status: motherStatus } = usePerson(person?.motherId)
 
     if (status == 404) {
-        redirect("/persons")
+        router.push("/persons")
     }
 
     if (id == null || person == null) {
@@ -82,17 +81,17 @@ export default function PersonInfo({ id }: Props) {
                 }
             </ul>
             <br />
-            <h2>VANHEMMAT</h2>
-            <ul>
-                <li>{father != null ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</li>
-                <li>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>
-            </ul>
-            <br />
-            <h2>LISÄVAIHTOEHDOT</h2>
-            <ul>
-                <li><Link href={`/persons/${id}/put`}><u>Muokkaa sukulaista</u></Link></li>
-                <li><Link href={`/persons/${id}/delete`}><u>Poista sukulainen</u></Link></li>
-            </ul>
+            {/*<h2>VANHEMMAT</h2>*/}
+            {/*<ul>*/}
+            {/*    <li>{father != null ? <Link href={`/persons/${father.id}`}><u>{fatherName}</u></Link> : "N/A"}</li>*/}
+            {/*    <li>{mother != null ? <Link href={`/persons/${mother.id}`}><u>{motherName}</u></Link> : "N/A"}</li>*/}
+            {/*</ul>*/}
+            {/*<br />*/}
+            {/*<h2>LISÄVAIHTOEHDOT</h2>*/}
+            {/*<ul>*/}
+            {/*    <li><Link href={`/persons/${id}/put`}><u>Muokkaa sukulaista</u></Link></li>*/}
+            {/*    <li><Link href={`/persons/${id}/delete`}><u>Poista sukulainen</u></Link></li>*/}
+            {/*</ul>*/}
         </div>
     )
 }

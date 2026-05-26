@@ -133,6 +133,11 @@ aside {
             font-size: 1.2em;
         }
 
+        tr:hover {
+            background: lightgray;
+            cursor: pointer;
+        }
+
         td {
             min-width: 20vh;
             padding: 0.6vh 0 0.6vh 0;

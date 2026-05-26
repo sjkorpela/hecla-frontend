@@ -1,19 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { initKeycloak } from "@/lib/keycloak";
 
 export default function KeycloakProvider({ children }: { children: React.ReactNode }) {
-    const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        initKeycloak().then(() => setReady(true));
+        initKeycloak();
     }, []);
-
-    if (!ready) {
-        return (
-            <p>Loading...</p>
-        );
-    }
     
     return <>{children}</>;
 }
