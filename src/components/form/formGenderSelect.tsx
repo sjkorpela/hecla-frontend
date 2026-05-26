@@ -14,10 +14,12 @@ export default function FormGenderSelect({ gender, setSelectedGender, testingId 
     }
 
     return (
-        <select onChange={(e) => selectChange(e)} name={testingId} value={gender?.valueOf()}>
+        <div className="select-wrapper">
+            <select onChange={(e) => selectChange(e)} name={testingId} value={gender?.valueOf()}>
                 <option value={"null"}>Valitse</option>
                 <option value={Gender.Male.valueOf()}>Mies</option>
                 <option value={Gender.Female.valueOf()}>Nainen</option>
-        </select>
+            </select>
+        </div>
     )
 }

@@ -1,0 +1,30 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+
+    h2 {
+        padding-top: 2vh;
+    }
+}
+
+section {
+    /*background: lightcoral;*/
+    margin-bottom: 3vh;
+
+
+    div.divide {
+        display: flex;
+        margin-bottom: 1vh;
+
+        label {
+            /*background: lightblue;*/
+            width: 130px;
+        }
+    }
+
+    div {
+        flex: 1;
+    }
+}

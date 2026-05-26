@@ -40,6 +40,10 @@ h2, h3, h4 {
     padding-bottom: 1vh;
 }
 
+dialog {
+    all: unset;
+}
+
 * {
     input, button {
         all: unset;
@@ -52,8 +56,19 @@ h2, h3, h4 {
         font-size: 0.8em;
     }
 
+    input, button, .select-wrapper {
+        max-width: 160px;
+    }
+
     button {
         cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+        all: unset;
+        width: 30px;
+        height: 30px;
+        background: black;
     }
 
     select:hover,
