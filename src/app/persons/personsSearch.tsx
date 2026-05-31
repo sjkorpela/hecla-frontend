@@ -15,7 +15,7 @@ export default function PersonsSearch() {
     }
 
     function renderSearchResults() {
-        if (searchQuery.length <= 0) return <></>;
+        if (searchQuery.trim().length <= 0) return <></>;
         if (loading) return <div className="persons-search-result-item">Lataa...</div>
         if (personArray == null) return <div className="persons-search-result-item">Ei tuloksia...</div>
         if (personArray.length <= 0) return <div className="persons-search-result-item">Ei tuloksia...</div>
