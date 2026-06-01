@@ -10,7 +10,7 @@ html, body {
     overflow-x: hidden;
 }
 
-* {
+*, *::before, *::after {
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     box-sizing: border-box;
@@ -136,7 +136,7 @@ dialog {
     }
 
     input[type="number"] {
-        -moz-appearance: textfield; /* Firefox */
+        -moz-appearance: textfield;
     }
 
     .input-number-reset {

@@ -40,7 +40,7 @@ export default function useAllPersonsPaged({pageNumber, pageSize, onLoad, sort, 
                 status: null
             })
 
-            const { page , status } = await PersonService.getAllPersons({pageNumber, pageSize, sort, filter});
+            const { page, status } = await PersonService.getAllPersons({pageNumber, pageSize, sort, filter});
 
             if (expired) return;
 

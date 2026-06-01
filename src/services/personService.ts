@@ -40,8 +40,8 @@ export class PersonService {
 
         let params = "?";
 
-        if (pageNumber != null) params += `page=${pageNumber}`
-        if (pageSize != null) params += `size=${pageSize}`
+        if (pageNumber != null) params += `page=${pageNumber}&`
+        if (pageSize != null) params += `size=${pageSize}&`
 
         if (filter != null) {
             if (filter.deceased != null) params += `deceased=${filter.deceased}&`
