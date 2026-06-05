@@ -1,4 +1,5 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import "./formYearInput.css"
 
 interface Props {
     year: number | null
@@ -30,18 +31,18 @@ export default function FormYearInput({ year, setYear, placeholder, testingId }:
     }
 
     return (
-        <div className="input-number-wrapper"><input
-            type={"number"}
-            placeholder={placeholder ?? "####"}
-            defaultValue={year ?? ""}
-            onKeyDown={inputKeyDown}
-            onChange={inputChange}
-            id={testingId}
-            name={testingId}
-        />
-            <div
-                className={`input-number-reset ${year == null ? "disabled" : ""}`}
-                onClick={resetInput}>
+        <div className="input-number-wrapper">
+            <input
+                type={"number"}
+                placeholder={placeholder ?? "####"}
+                defaultValue={year ?? ""}
+                onKeyDown={inputKeyDown}
+                onChange={inputChange}
+                id={testingId}
+                name={testingId}
+            />
+            <div className={`input-number-reset ${year == null ? "disabled" : ""}`} onClick={resetInput}>
+                close
             </div>
         </div>
     )

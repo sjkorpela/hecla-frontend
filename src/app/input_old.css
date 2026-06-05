@@ -1,0 +1,91 @@
+* {
+    input, button {
+        all: unset;
+        padding: 0 5px 0 5px;
+        border-style: solid;
+        border-width: 0.2vh;
+        border-color: black;
+        border-radius: 7px;
+        height: 1.8em;
+        font-size: 0.8em;
+    }
+
+    input, button, .select-wrapper {
+        max-width: 160px;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+        all: unset;
+        width: 30px;
+        height: 30px;
+        background: black;
+    }
+
+    select:hover,
+    select:focus-visible,
+    button:hover,
+    button:focus-visible {
+        background: lightgray;
+    }
+
+
+    input[type="number"] {
+        all: unset;
+        flex: 1;
+        background: transparent;
+        padding: 0 5px 0 5px;
+    }
+
+    .input-number-wrapper {
+        position: relative;
+        border-style: solid;
+        border-width: 0.2vh;
+        border-color: black;
+        border-radius: 7px;
+        height: 1.8em;
+        font-size: 0.8em;
+        display: flex;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    .input-number-reset {
+        cursor: pointer;
+    }
+
+    .input-number-reset::after {
+        font-family: "Material Symbols Outlined";
+        content: "close";
+        width: 25px;
+        height: 100%;
+        background: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        font-size: 1.2em;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    .disabled.input-number-reset {
+        cursor: default;
+    }
+
+    .disabled.input-number-reset::after {
+        color: gray;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}

@@ -1,0 +1,14 @@
+input[type="text"] {
+    all: unset;
+    padding: 0 5px 0 5px;
+    border-style: solid;
+    border-width: 0.2vh;
+    border-color: black;
+    border-radius: 7px;
+    height: 1.8em;
+    font-size: 0.8em;
+}
+
+input[type="text"] {
+    max-width: 160px;
+}

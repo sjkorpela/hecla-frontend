@@ -3,6 +3,8 @@
 import {PersonService} from "@/services/personService";
 import usePerson from "@/hooks/usePerson";
 import {useRouter} from "next/navigation";
+import "./deleteForm.css"
+import {useEffect, useState} from "react";
 
 interface Props {
     id: number
@@ -13,9 +15,11 @@ export default function DeleteForm({ id }: Props) {
 
     const { loading, person, status } = usePerson(id)
 
-    if (status == 404) {
-        router.push("/persons")
-    }
+    useEffect(() => {
+        if (status == 404) {
+            router.push("/persons/refresh")
+        }
+    }, [status]);
 
     if (id == null || person == null) {
         return (
@@ -24,41 +28,33 @@ export default function DeleteForm({ id }: Props) {
     }
 
     const personName = PersonService.getPersonsFirstAndLastName(person)
-    const birthInfo = `${person.birthYear ?? "N/A"}, ${person.birthPlace ?? "N/A"}`
+    // const birthInfo = `${person.birthYear ?? "N/A"}, ${person.birthPlace ?? "N/A"}`
 
-    async function formSubmit(e: React.SubmitEvent<HTMLFormElement>) {
-        e.preventDefault();
-        const form = new FormData(e.target);
-
-        if (form.get("verify") != personName) {
-            alert("Kirjoita sukulaisen käyttönimi vahvistaaksesi poiston. Mukaanlukien mahdolliset puuttuvaa tietoa esittävät kohdat, esim. \"Joonas N/A\"")
-            return;
-        }
-
+    async function deletePerson() {
         const status = await PersonService.deletePerson(id);
 
         if (status == 204) {
-            router.push("/persons")
+            router.push("/persons/refresh")
         } else {
             alert("Jokin meni vikaan?")
         }
     }
 
+    function navBack() { router.back(); }
+
     return (
-        <form onSubmit={formSubmit}>
-            <h2>Poistettava sukulainen</h2>
-            <ul>
-                <li>{personName}</li>
-                <li>Syntynyt {birthInfo}</li>
-            </ul>
-            <br/>
+        <div className="delete-form">
+            <header>
+                <button className="icon-button" onClick={navBack} >arrow_back</button>
+            </header>
 
-            <label>Kirjoita postettavan sukulaisen nimi vahvistaaksesi poiston:</label><br/>
-            <input type={"text"} name={"verify"} placeholder={"Etunimi Sukunimi"}/><br/>
-            <br/>
+            <div>
+                <h1>POISTA SUKULAINEN?</h1>
+                <div className="info">Sukulainen: {personName}</div>
 
-            <label>Poista sukulainen</label><br />
-            <input type={"submit"} value={"Poista"} name={"delete"}/>
-        </form>
+                <button onClick={deletePerson}>Poista sukulainen</button>
+            </div>
+        </div>
+
     )
 }

@@ -3,6 +3,7 @@
 import {ChangeEvent, useState} from "react";
 import useAllPersonsSearch from "@/hooks/useAllPersonsSearch";
 import PersonsSearchItem from "./personsSearchItem";
+import "./personsSearch.css"
 
 export default function PersonsSearch() {
 

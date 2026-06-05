@@ -1,0 +1,36 @@
+.additional-info-pool {
+    width: fit-content;
+
+    .info-item {
+        display: flex;
+        height: 30px;
+        margin-bottom: 0.3rem;
+
+        .info-key {
+            height: 100%;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .info-value {
+            height: 100%;
+            border-width: 1px 0 1px 0;
+            border-radius: 0;
+        }
+
+        .info-delete {
+            font-family: "Material Symbols Outlined";
+            text-align: center;
+            background: black;
+            color: white;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            width: 20px;
+            height: 100%
+        }
+    }
+
+    .info-item:last-of-type {
+        margin-bottom: 0.5rem;
+    }
+}

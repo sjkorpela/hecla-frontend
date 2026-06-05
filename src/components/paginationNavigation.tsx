@@ -1,4 +1,6 @@
 
+import "./paginationNavigation.css"
+
 interface Props {
     pageNumber: number,
     setPageNumber: (newPageNumber: number) => void,
@@ -31,13 +33,16 @@ export default function PaginationNavigation({pageNumber, setPageNumber, totalPa
         setPageNumber(pageNumber + 1);
     }
 
+    const atFirstPage: boolean = pageNumber <= 0;
+    const atLastPage: boolean = pageNumber + 1 >= totalPages;
+
     return (
         <div className="page-number-navigation">
-            <button className="left" onClick={pageFirst}>{"<<"}</button>
-            <button className="center" onClick={pageLeft}>{"<"}</button>
-            <div className="center">{pageNumber + 1}</div>
-            <button className="center" onClick={pageRight}>{">"}</button>
-            <button className="right" onClick={pageLast}>{">>"}</button>
+            <button className={`left icon${atFirstPage ? " disabled" : ""}`} disabled={atFirstPage} onClick={pageFirst}>{ atFirstPage ? "remove" : "first_page"}</button>
+            <button className="center icon" disabled={atFirstPage} onClick={pageLeft}>{ atFirstPage ? "remove" : "keyboard_arrow_left"}</button>
+            <div className="center text">{pageNumber + 1}</div>
+            <button className="center icon" disabled={atLastPage} onClick={pageRight}>{ atLastPage ? "remove" : "keyboard_arrow_right"}</button>
+            <button className="right icon" disabled={atLastPage} onClick={pageLast}>{ atLastPage ? "remove" : "last_page"}</button>
         </div>
     )
 }

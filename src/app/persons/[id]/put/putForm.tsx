@@ -19,6 +19,7 @@ import FormCheckbox from "@/components/form/formCheckbox";
 import {useRouter} from "next/navigation";
 import usePerson from "@/hooks/usePerson";
 import FormAdditionalInfoPool from "@/components/form/formAdditionalInfoPool";
+import "./putForm.css"
 
 interface Props {
     id: number
@@ -143,62 +144,104 @@ export default function PutForm({ id }: Props) {
         }
     }
 
+    function navBack() { router.back(); }
+
     return (
-        <form onSubmit={(e) => formSubmit(e)}>
-            <label>Etunimet</label><br/>
-            <FormNamePool names={firstNames} setNames={setFirstnames} placeholder={"Etunimi"} testingId={"firstName"}/>
-            <br/>
+        <div className="person-put-form">
+            <form onSubmit={(e) => formSubmit(e)}>
+                <h1>MUOKKAA SUKULAISTA</h1>
+                <h3>Perustiedot</h3>
+                <section>
+                    <div className="divide">
+                        <label>Etunimet:</label>
+                        <FormNamePool names={firstNames} setNames={setFirstnames} placeholder={"Etunimi"} testingId={"firstName"}/>
+                    </div>
 
-            <label>Kutsumanimi</label><br/>
-            <FormNameSelect names={firstNames} setSelectedName={setNickname} testingId={"nickname"} /><br/>
-            <br/>
+                    <div className="divide">
+                        <label>Kutsumanimi:</label>
+                        <FormNameSelect names={firstNames} setSelectedName={setNickname} testingId={"nickname"} />
+                    </div>
+                </section>
 
-            <label>Sukunimet</label><br/>
-            <FormNamePool names={lastNames} setNames={setLastNames} placeholder={"Sukunimi"} testingId={"lastName"}/>
-            <br/>
+                <section>
+                    <div className="divide">
+                        <label>Sukunimet:</label>
+                        <FormNamePool names={lastNames} setNames={setLastNames} placeholder={"Sukunimi"} testingId={"lastName"}/>
+                    </div>
 
-            <label>Käytössä</label><br/>
-            <FormNameSelect names={lastNames} setSelectedName={setCurrent} testingId={"current"} /><br/>
-            <br/>
+                    <div className="divide">
+                        <label>Käytössä:</label>
+                        <FormNameSelect names={lastNames} setSelectedName={setCurrent} testingId={"current"} />
+                    </div>
+                </section>
 
-            <label>Isä</label><br/>
-            <FormPersonSelect persons={personArray} selectedPersonId={fatherId} setSelectedPersonId={setFatherId} testingId={"fatherId"} /><br/>
-            <br/>
+                <section>
+                    <div className="divide">
+                        <label>Sukupuoli:</label>
+                        <FormGenderSelect gender={gender} setSelectedGender={setGender} testingId={"gender"} />
+                    </div>
+                </section>
 
-            <label>Äiti</label><br/>
-            <FormPersonSelect persons={personArray} selectedPersonId={motherId} setSelectedPersonId={setMotherId} testingId={"motherId"} /><br/>
-            <br/>
+                <section>
+                    <div className="divide">
+                        <label>Syntymävuosi:</label>
+                        <FormYearInput year={birthYear} setYear={setBirthYear} testingId={"birthYear"}/>
+                    </div>
+                    <div className="divide">
+                        <label>Syntymäpaikka:</label>
+                        <FormTextInput text={birthPlace} setText={setBirthPlace} placeholder={"Sijainti"} testingId={"birthPlace"}/>
+                    </div>
+                </section>
 
-            <label>Sukupuoli</label><br/>
-            <FormGenderSelect gender={gender} setSelectedGender={setGender} testingId={"gender"} /><br/>
-            <br/>
+                <section>
+                    <div className="divide">
+                        <label>Kuolinvuosi:</label>
+                        <FormYearInput year={deathYear} setYear={setDeathYear} testingId={"deathYear"}/>
+                    </div>
+                    <div className="divide">
+                        <label>Kuolinpaikka:</label>
+                        <FormTextInput text={deathPlace} setText={setDeathPlace} placeholder={"Sijainti"} testingId={"deathPlace"}/>
+                    </div>
+                    <div className="divide">
+                        <label>Kuollut:</label>
+                        <FormCheckbox state={deceased} setState={setDeceased} testingId={"deceased"}/>
+                    </div>
+                </section>
 
-            <label>Syntymävuosi</label><br/>
-            <FormYearInput year={birthYear} setYear={setBirthYear} testingId={"birthYear"}/><br/>
-            <br/>
 
-            <label>Syntymäpaikka</label><br/>
-            <FormTextInput text={birthPlace} setText={setBirthPlace} placeholder={"Sijainti"} testingId={"birthPlace"}/><br/>
-            <br/>
 
-            <label>Kuollut</label><br/>
-            <FormCheckbox state={deceased} setState={setDeceased} testingId={"deceased"}/><br/>
-            <br/>
+                <h3>Lisätiedot</h3>
 
-            <label>Kuolinvuosi</label><br/>
-            <FormYearInput year={deathYear} setYear={setDeathYear} testingId={"deathYear"}/><br/>
-            <br/>
+                <section>
+                    <div className="divide">
+                        <label>Lisätiedot:</label>
+                        <FormAdditionalInfoPool infos={additionalInfos} setInfos={setAdditionalInfos}/>
+                    </div>
+                </section>
 
-            <label>Kuolinpaikka</label><br/>
-            <FormTextInput text={deathPlace} setText={setDeathPlace} placeholder={"Sijainti"} testingId={"deathPlace"}/><br/>
-            <br/>
 
-            <label>Lisätiedot</label><br/>
-            <FormAdditionalInfoPool infos={additionalInfos} setInfos={setAdditionalInfos}/><br/>
-            <br/>
 
-            <label>Tallenna muutokset tietokantaan</label><br />
-            <input type={"submit"} value={"Tallenna"} name={"post"}/>
-        </form>
+                <h3>Vanhemmuussuhteet</h3>
+
+                <section>
+                    <div className="divide">
+                        <label>Isä:</label>
+                        <FormPersonSelect selectedPersonId={fatherId} setSelectedPersonId={setFatherId} testingId={"fatherId"} />
+                    </div>
+                    <div className="divide">
+                        <label>Äiti:</label>
+                        <FormPersonSelect selectedPersonId={motherId} setSelectedPersonId={setMotherId} testingId={"motherId"} />
+                    </div>
+                </section>
+
+
+                <label>Tallenna muutokset</label>
+                <button type={"submit"} name={"post"}>Tallenna</button>
+            </form>
+
+            <div className="right">
+                <button className="icon-button" onClick={navBack} >arrow_back</button>
+            </div>
+        </div>
     )
 }

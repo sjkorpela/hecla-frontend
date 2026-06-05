@@ -10,13 +10,19 @@ let initPromise: Promise<boolean> | null = null;
 
 export function initKeycloak() {
     if (!initPromise) {
-        initPromise = keycloak.init({ onLoad: "login-required" }).catch((e) => {
+        initPromise = keycloak.init({
+            onLoad: "login-required",
+            pkceMethod: 'S256',
+            silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+            checkLoginIframe: false,
+        }).catch((e) => {
             if (e?.message?.includes("only be initialized once")) {
                 return true;
             }
             throw e;
         });
     }
+
     return initPromise;
 }
 

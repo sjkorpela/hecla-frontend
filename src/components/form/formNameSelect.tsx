@@ -1,4 +1,5 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import WrappedSelect from "@/components/wrappedInputs/wrappedSelect";
 
 interface Props {
     names: string[]
@@ -13,7 +14,7 @@ export default function FormNameSelect({ names, setSelectedName, testingId }: Pr
     }
 
     return (
-        <div className="select-wrapper"><select onChange={(e) => selectChange(e)} name={testingId}>
+        <WrappedSelect onChange={(e) => selectChange(e)}>
             <option value={-1}>Valitse</option>
             {
                 names.map((fn, key) => {
@@ -22,6 +23,6 @@ export default function FormNameSelect({ names, setSelectedName, testingId }: Pr
                     )
                 })
             }
-        </select></div>
+        </WrappedSelect>
     )
 }

@@ -5,7 +5,7 @@ export default function PersonsPage() {
     return (
         <main className="persons-main">
 
-            <header>
+            <header className="hecla">
                 <h1>HE/CLA</h1>
             </header>
 

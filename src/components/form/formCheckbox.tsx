@@ -1,4 +1,5 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import "./formCheckbox.css"
 
 interface Props {
     state: boolean | null

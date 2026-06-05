@@ -1,0 +1,55 @@
+.page-number-navigation {
+    all: unset;
+    user-select: none;
+    display: flex;
+    align-items: stretch;
+    margin-top: 2vh;
+
+    * {
+        border: 1px solid black;
+    }
+
+    button.left {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    button.right {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left: -1px;
+    }
+
+    .center {
+        border-radius: 0;
+        margin-left: -1px;
+        border-right-width: 1px;
+        border-left-width: 1px;
+        padding: 0 1vh 0 1vh;
+    }
+
+    .icon {
+        font-family: "Material Symbols Outlined";
+        font-size: 20px;
+        width: 15px;
+    }
+
+    .text {
+        min-width: 40px;
+        text-align: center;
+    }
+
+    .left, .center, .right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+    }
+
+    button:disabled:hover {
+        background: white;
+    }
+}

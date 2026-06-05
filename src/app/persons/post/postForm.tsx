@@ -16,13 +16,11 @@ import FormYearInput from "@/components/form/formYearInput";
 import FormTextInput from "@/components/form/formTextInput";
 import FormCheckbox from "@/components/form/formCheckbox";
 import FormNamePool from "@/components/form/formNamePool";
-import FormAdditionalInfoPool from '../../../components/form/formAdditionalInfoPool';
+import FormAdditionalInfoPool from "@/components/form/formAdditionalInfoPool";
 import "./postForm.css";
 
 export default function PostForm() {
     const router = useRouter();
-
-    const { loading, personArray, status } = useAllPersons()
 
     const [firstNames, setFirstnames] = useState<string[]>([])
     const [nickname, setNickname] = useState<number | null>(null);
@@ -98,8 +96,9 @@ export default function PostForm() {
     }
 
     return (
-        <form onSubmit={(e) => formSubmit(e)} className="persons-post-form">
-            <h2>Perustiedot</h2>
+        <form onSubmit={(e) => formSubmit(e)} className="person-post-form">
+            <h1>LISÄÄ UUSI SUKULAINEN</h1>
+            <h3>Perustiedot</h3>
             <section>
                 <div className="divide">
                     <label>Etunimet:</label>
@@ -159,7 +158,7 @@ export default function PostForm() {
 
 
 
-            <h2>Lisätiedot</h2>
+            <h3>Lisätiedot</h3>
 
             <section>
                 <div className="divide">
@@ -170,22 +169,22 @@ export default function PostForm() {
 
 
 
-            <h2>Vanhemmuussuhteet</h2>
+            <h3>Vanhemmuussuhteet</h3>
 
             <section>
                 <div className="divide">
-                    <label>Isä</label>
-                    {/*<FormPersonSelect persons={personArray} selectedPersonId={fatherId} setSelectedPersonId={setFatherId} testingId={"fatherId"} />*/}
+                    <label>Isä:</label>
+                    <FormPersonSelect selectedPersonId={fatherId} setSelectedPersonId={setFatherId} testingId={"fatherId"} />
                 </div>
                 <div className="divide">
-                    <label>Äiti</label>
-                    {/*<FormPersonSelect persons={personArray} selectedPersonId={motherId} setSelectedPersonId={setMotherId} testingId={"motherId"} />*/}
+                    <label>Äiti:</label>
+                    <FormPersonSelect selectedPersonId={motherId} setSelectedPersonId={setMotherId} testingId={"motherId"} />
                 </div>
             </section>
             
 
-            <label>Tallenna sukulainen tietokantaan</label><br />
-            <input type={"submit"} value={"Tallenna"} name={"post"}/>
+            <label>Tallenna sukulainen tietokantaan</label>
+            <button type={"submit"} name={"post"}>Tallenna</button>
         </form>
     )
 }

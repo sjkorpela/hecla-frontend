@@ -1,0 +1,65 @@
+
+.person-put-form {
+    display: flex;
+    gap: 3vh;
+    overflow: hidden;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.2em;
+        min-width: 35rem;
+        padding-bottom: 3rem;
+
+        h1 {
+            font-size: 1.8em;
+            font-weight: normal;
+        }
+
+        h3 {
+            padding-top: 2vh;
+        }
+
+        section {
+            /*background: lightcoral;*/
+            margin-bottom: 3vh;
+
+
+            div.divide {
+                display: flex;
+                margin-bottom: 1vh;
+
+                label {
+                    /*background: lightblue;*/
+                    width: 150px;
+                }
+            }
+
+            div {
+                flex: 1;
+            }
+        }
+
+        .wrapped-select, .input-number-wrapper {
+            max-width: 150px;
+        }
+
+        td:first-child {
+            padding-right: 15px;
+        }
+
+        input, select, button{
+            font-size: 1rem;
+        }
+
+        button[type="submit"] {
+            width: fit-content;
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

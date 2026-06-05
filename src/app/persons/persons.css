@@ -13,54 +13,6 @@ aside {
     font-size: 1.2em;
 }
 
-.persons-search {
-    z-index: 99;
-    max-height: 30px;
-    max-width: 330px;
-    margin-bottom: 20px;
-    overflow: visible;
-    background: white;
-
-    .persons-search-wrapper {
-        position: relative;
-        z-index: 99;
-        border-style: solid;
-        border-width: 0.2vh;
-        border-radius: 20px;
-        background: white;
-        overflow: hidden;
-    }
-
-    input {
-        height: 30px;
-        min-width: 95%;
-        padding: 10px 10px 10px 10px;
-        border-style: none;
-        font-size: 1em;
-    }
-
-    .persons-search-results {
-        position: relative;
-        top: 100%;
-        background: white;
-
-        .persons-search-result-item {
-            background: transparent;
-            padding: 1vh;
-            border-style: solid;
-            border-width: 0.2vh 0 0 0;
-            border-color: darkgray;
-            cursor: pointer;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .persons-search-result-item:hover {
-            background: lightgray;
-        }
-    }
-}
-
 .filters-title {
     display: flex;
     justify-content: space-between;
@@ -75,12 +27,16 @@ aside {
 .filters {
     min-width: max-content;
 
+    .wrapped-select, .input-number-wrapper {
+        max-width: 157px;
+    }
+
     td:first-child {
         padding-right: 15px;
     }
 
-    input, select{
-        width: 120px;
+    input, select, button{
+        font-size: 1.1rem;
     }
 
     button {
@@ -98,6 +54,7 @@ aside {
         padding: 0;
         margin: 0;
         height: 100%;
+        user-select: text;
     }
 
     .all-persons-sort-arrow {
@@ -128,17 +85,21 @@ aside {
     }
 
     table {
+        border-radius: 0;
         width: 100%;
         border-collapse: collapse;
+        text-wrap: nowrap;
 
         th {
             text-align: left;
             font-size: 1.2em;
+            border-radius: 0;
         }
 
         tr.tr-clickable:hover {
             background: lightgray;
             cursor: pointer;
+            border-radius: 0;
         }
 
         tr.whiteout {
@@ -146,12 +107,15 @@ aside {
         }
 
         td {
-            min-width: 20vh;
-            padding: 0.6vh 0 0.6vh 0;
+            border-radius: 0;
+            min-width: 10rem;
+            max-width: 10rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0.6vh 0.2rem 0.6vh 0;
             border-style: solid;
             border-width: 0 0 0.2vh 0;
             border-color: darkgray;
-            border-radius: 200px;
             font-size: 1.2em;
 
             .not-available {
@@ -163,49 +127,5 @@ aside {
         td:last-of-type {
             width: 50%;
         }
-    }
-}
-
-.page-number-navigation {
-    all: unset;
-    user-select: none;
-    display: flex;
-    align-items: stretch;
-    margin-top: 2vh;
-
-    * {
-        border: 1px solid black;
-    }
-
-    button {
-
-    }
-
-    button:hover, button:focus-visible {
-
-    }
-
-    button.left {
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
-    }
-
-    button.right {
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        margin-left: -1px;
-    }
-
-    div.center {
-        min-width: 40px;
-        text-align: center;
-    }
-
-    .center {
-        border-radius: 0;
-        margin-left: -1px;
-        border-right-width: 1px;
-        border-left-width: 1px;
-        padding: 0 1vh 0 1vh;
     }
 }

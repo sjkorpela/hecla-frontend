@@ -2,6 +2,7 @@ import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import {PersonsFilter} from "@/types/personsFilter";
 import {Gender} from "@/types/gender";
 import FormYearInput from "@/components/form/formYearInput";
+import WrappedSelect from "@/components/wrappedInputs/wrappedSelect";
 
 interface Props {
     filter: PersonsFilter | undefined
@@ -63,32 +64,22 @@ export default function AllPersonsTableFilter({filter, setFilter}: Props) {
                     <tr>
                         <td>Elossa:</td>
                         <td>
-                            <div className="select-wrapper"><select
-                                onChange={(e) => setDeceased(
-                                    parseDeceased(e.target.value)
-                                )}
-                                name={"alive"}
-                            >
+                            <WrappedSelect onChange={(e) => setDeceased(parseDeceased(e.target.value))}>
                                 <option value={"null"}>Valitse</option>
                                 <option value={"true"}>Elossa</option>
                                 <option value={"false"}>Kuollut</option>
-                            </select></div>
+                            </WrappedSelect>
                         </td>
                     </tr>
                     <tr>
                         <td>Sukupuoli:</td>
                         <td>
-                            <div className="select-wrapper"><select
-                                onChange={(e) => setGender(
-                                    e.target.value == "null" ? null : e.target.value as Gender
-                                )}
-                                name={"gender"}
-                            >
+                            <WrappedSelect onChange={(e) => setGender(e.target.value == "null" ? null : e.target.value as Gender)}>
                                 <option value={"null"}>Valitse</option>
                                 <option value={Gender.Male.valueOf()}>Mies</option>
                                 <option value={Gender.Female.valueOf()}>Nainen</option>
                                 {/*<option value={"unknown"}>Ei merkitty</option>*/}
-                            </select></div>
+                            </WrappedSelect>
                         </td>
                     </tr>
                     <tr>

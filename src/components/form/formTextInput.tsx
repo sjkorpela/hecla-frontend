@@ -1,4 +1,5 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import "./formTextInput.css"
 
 interface Props {
     text: string | null

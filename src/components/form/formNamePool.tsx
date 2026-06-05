@@ -1,5 +1,5 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
-import {test} from "@playwright/test";
+import "./formNamePool.css";
 
 interface Props {
     names: string[]
@@ -27,11 +27,11 @@ export default function FormNamePool({ names, setNames, placeholder, testingId }
     }
 
     return (
-        <div>
+        <div className="name-pool">
             {
                 names.map((name, key) => {
                     return (
-                        <div key={key}>
+                        <div key={key} className="name-pool-object">
                             <input
                                 type={"text"}
                                 defaultValue={name}
@@ -40,10 +40,11 @@ export default function FormNamePool({ names, setNames, placeholder, testingId }
                                 name={testingId}
                             />
                             <button
+                                className="name-pool-object-remove"
                                 type={"button"}
                                 onClick={() => deleteName(key)}
                                 name={`${testingId}_delete`}
-                            >X</button>
+                            ></button>
                         </div>
                     )
                 })
@@ -52,7 +53,7 @@ export default function FormNamePool({ names, setNames, placeholder, testingId }
                 type={"button"}
                 onClick={addName}
                 name={`${testingId}_new`}
-            >Lisää nimi</button>
+            >Lisää uusi nimi</button>
         </div>
     )
 }

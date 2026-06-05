@@ -1,6 +1,3 @@
-import styles from "@/app/page.module.css";
-import Link from "next/dist/client/link";
-import PersonInfo from "@/app/persons/[id]/personInfo";
 import PutForm from "@/app/persons/[id]/put/putForm";
 import Modal from "@/components/modal";
 

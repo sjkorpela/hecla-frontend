@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="460"
+   height="460"
+   viewBox="0 0 460 460"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs1" /><g
+     id="layer1"
+     transform="translate(-25,-40)"><circle
+       style="fill:#fcb3b3;fill-opacity:1;stroke-width:3.51765;stroke-linecap:round;stroke-linejoin:round"
+       id="path1"
+       cx="255"
+       cy="270"
+       r="230" /><path
+       style="fill:#f20000;fill-opacity:1;stroke-width:4.05959;stroke-linecap:round;stroke-linejoin:round"
+       id="path2"
+       d="m 302.827,284.70505 c -12.51353,7.51869 -27.16535,11.84226 -42.827,11.84226 -15.66165,0 -30.31347,-4.32357 -42.827,-11.84226 -38.86059,-23.34917 -38.86059,-119.51363 0,-142.8628 12.51353,-7.51868 27.16535,-11.84226 42.827,-11.84226 15.66165,0 30.31347,4.32358 42.827,11.84226 38.86059,23.34917 38.86059,119.51363 0,142.8628 z"
+       transform="translate(0,2.5)" /><path
+       id="path3"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#f20000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+       d="m 395,415 c 0,42.68415 -49.9695,78.0199 -115.08549,84.08162 -10.96277,1.02054 -28.86625,1.02054 -39.82902,0 C 174.9695,493.0199 125,457.68415 125,415 c 0,-13.05904 4.67729,-25.43024 13.03462,-36.48572 43.71544,-57.82889 200.21532,-57.82889 243.93076,0 C 390.32271,389.56976 395,401.94096 395,415 Z" /></g></svg>

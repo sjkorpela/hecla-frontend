@@ -1,0 +1,47 @@
+.wrapped-select {
+    position: relative;
+    border-style: solid;
+    border-width: 0.2vh;
+    border-color: black;
+    border-radius: 7px;
+    height: 2rem;
+    display: flex;
+    user-select: none;
+
+    select:hover, select:focus-visible {
+        background: lightgray;
+    }
+
+    *:focus-visible {
+        outline: 3px solid Highlight;
+    }
+
+    select {
+        all: unset;
+        flex: 1;
+        background: transparent;
+        padding: 0 5px 0 5px;
+        border-radius: inherit;
+        cursor: pointer;
+        width: 100%;
+    }
+}
+
+.wrapped-select::after {
+    font-family: "Material Symbols Outlined";
+    content: "keyboard_arrow_down";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1.8rem;
+    height: 100%;
+    background: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    font-size: 1.5rem;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}

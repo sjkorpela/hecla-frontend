@@ -1,5 +1,6 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
 import {AdditionalInfo} from "@/types/additionalInfo";
+import "./formAdditionalInfoPool.css"
 
 interface Props {
     infos: AdditionalInfo[]
@@ -40,25 +41,26 @@ export default function FormAdditionalInfoPool({ infos, setInfos }: Props) {
     }
 
     return (
-        <div>
+        <div className="additional-info-pool">
             {
                 infos.map((info, key) => {
                     return (
-                        <div key={key}>
+                        <div className="info-item" key={key}>
                             <input
+                                className="info-key"
                                 type={"text"}
                                 defaultValue={info.key}
                                 placeholder={"Nimike"}
                                 onChange={(e) => updateInfoKey(e, key)}
                             />
                             <input
+                                className="info-value"
                                 type={"text"}
                                 defaultValue={info.value}
                                 placeholder={"Lisätieto"}
                                 onChange={(e) => updateInfoValue(e, key)}
                             />
-                            <button
-                                type={"button"} onClick={() => deleteInfo(key)}>X</button>
+                            <button className="info-delete" type={"button"} onClick={() => deleteInfo(key)}>close</button>
                         </div>
                     )
                 })

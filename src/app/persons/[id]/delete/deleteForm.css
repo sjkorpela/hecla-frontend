@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+.delete-form {
+    font-size: 1.2em;
+    display: flex;
+    gap: 3vh;
+    overflow: hidden;
+    flex-direction: row-reverse;
+
+    header {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        font-weight: normal;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    h3 {
+        margin-top: 2vh;
+    }
+
+    .info {
+        max-width: 800px;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

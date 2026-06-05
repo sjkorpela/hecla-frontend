@@ -1,0 +1,50 @@
+.person-image-component {
+    user-select: none;
+}
+
+.person-image-component.link {
+    cursor: pointer;
+    border-radius: 99px;
+    height: 95px;
+    width: 95px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.person-image-component:not(:hover) {
+    z-index: 0;
+}
+
+.person-image-component.link .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    border-radius: 99px;
+    object-fit: cover;
+}
+
+.person-image-component.link .name-plate {
+    pointer-events: none;
+    margin-left: 1px;
+    margin-top: 1px;
+    height: 93px;
+    /*width: 93px;*/
+    padding-right: 10px;
+    border-radius: 99px;
+    background: transparent;
+    color: transparent;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    transition: padding-left 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.person-image-component.link:hover .name-plate {
+    background: black;
+    color: white;
+    padding-left: 105px;
+}
